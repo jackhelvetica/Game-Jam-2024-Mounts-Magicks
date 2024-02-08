@@ -82,7 +82,7 @@ public class PlayerControllers : MonoBehaviour
         {
             if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
             {
-                Debug.Log("Cross button pressed, the controller index is" + controllerIndex);
+                Debug.Log("L1 and R1 are pressed, the controller index is" + controllerIndex);
             }
             else
             {
