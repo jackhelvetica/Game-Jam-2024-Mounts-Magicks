@@ -72,6 +72,7 @@ public class PlayerControllers : MonoBehaviour
     
     public void JoinGame(InputAction.CallbackContext context)
     {
+
         string controllerName = context.control.device.name;
 
         int controllerIndex = controllersManager.GetControllerIndex(controllerName);
@@ -79,8 +80,14 @@ public class PlayerControllers : MonoBehaviour
         // Check if the action triggered is the Cross button
         if (context.performed) //if button is pressed
         {
-            // Cross button is pressed, do something
-            Debug.Log("Cross button pressed, the controller index is" + controllersManager.activePS4Controllers[controllerIndex]);
+            if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
+            {
+                Debug.Log("Cross button pressed, the controller index is" + controllerIndex);
+            }
+            else
+            {
+                Debug.LogWarning("Invalid controller index: " + controllerIndex);
+            }
         }
     }
 

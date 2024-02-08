@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ControllersManager : MonoBehaviour
 {
@@ -16,12 +17,22 @@ public class ControllersManager : MonoBehaviour
         // Clear the list before updating
         activePS4Controllers.Clear();
 
-        for (int i = 0; i < joystickNames.Length; i++)
-        {
+        // Get all connected gamepads
+        var gamepads = Gamepad.all;
 
-            // Add the PS4 controller to the list
-            activePS4Controllers.Add(joystickNames[i]);
+        // Iterate over each gamepad
+        foreach (var gamepad in gamepads)
+        {
+            // Get the device name of the gamepad
+            string deviceName = gamepad.device.name;
+
+            // Check if the device name starts with "DualShock4GamepadHID"
+            if (deviceName.StartsWith("DualShock4GamepadHID"))
+            {
+                activePS4Controllers.Add(deviceName);
+            }
         }
+
 
         // Display the active PS4 controllers
         DisplayActiveControllers();
@@ -46,6 +57,25 @@ public class ControllersManager : MonoBehaviour
 
     public int GetControllerIndex(string controllerName)
     {
-        return activePS4Controllers.IndexOf(controllerName);
+        if (string.IsNullOrEmpty(controllerName))
+        {
+            Debug.LogWarning("Controller name is null or empty.");
+            return -1; // Or return any appropriate value indicating error
+        }
+
+        // Use IndexOf to find the index of the controller name
+        int index = activePS4Controllers.IndexOf(controllerName);
+
+        // Print the controller name and its index for verification
+        if (index >= 0)
+        {
+            Debug.Log("Index of controller '" + controllerName + "' is: " + index);
+        }
+        else
+        {
+            Debug.LogWarning("Controller '" + controllerName + "' not found in activePS4Controllers.");
+        }
+
+        return index;
     }
 }
