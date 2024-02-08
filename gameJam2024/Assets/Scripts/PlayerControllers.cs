@@ -20,6 +20,12 @@ public class PlayerControllers : MonoBehaviour
 
     public InputAction join;
 
+    // Define a delegate for the event
+    public delegate void JoinGameEventHandler(int controllerIndex);
+
+    // Define the event
+    public event JoinGameEventHandler OnJoinGame;
+
     public ControllersManager controllersManager;
 
     private void Awake()
@@ -82,7 +88,13 @@ public class PlayerControllers : MonoBehaviour
         {
             if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
             {
-                Debug.Log("L1 and R1 are pressed, the controller index is" + controllerIndex);
+                Debug.Log("L1 and R1 are pressed, the controller index is " + controllerIndex);
+                
+                // Check if the event is not null before invoking it
+                if (OnJoinGame != null)
+                {
+                    OnJoinGame(controllerIndex);
+                }
             }
             else
             {

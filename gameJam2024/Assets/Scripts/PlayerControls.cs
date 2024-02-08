@@ -59,26 +59,37 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""320dab89-eed1-4b43-b9d9-d3e45cf9a042"",
-                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""name"": ""One Modifier"",
+                    ""id"": ""03b792e5-fe99-44eb-983b-c3210e2b2c4d"",
+                    ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Controller"",
+                    ""groups"": """",
                     ""action"": ""JoinGame"",
-                    ""isComposite"": false,
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""fadca600-a040-46bc-afdd-a8f9beb53f61"",
+                    ""name"": ""modifier"",
+                    ""id"": ""c6c1b590-368e-4b72-b827-a0df864237ba"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinGame"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""e133155a-6c0b-4f0d-a458-76d02010f978"",
                     ""path"": ""<DualShockGamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""JoinGame"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }
