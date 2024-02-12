@@ -37,9 +37,18 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""JoinGame"",
+                    ""name"": ""JoinLobby"",
                     ""type"": ""Button"",
                     ""id"": ""47a1f951-d0ff-4507-ac3d-a0378978fe61"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ExitLobby"",
+                    ""type"": ""Button"",
+                    ""id"": ""00014ce8-62ff-4732-807a-1215643a42b8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -47,6 +56,39 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""03b792e5-fe99-44eb-983b-c3210e2b2c4d"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinLobby"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""c6c1b590-368e-4b72-b827-a0df864237ba"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinLobby"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Binding"",
+                    ""id"": ""e133155a-6c0b-4f0d-a458-76d02010f978"",
+                    ""path"": ""<DualShockGamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JoinLobby"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
                 {
                     ""name"": """",
                     ""id"": ""0a4c08f5-2b8b-4d8e-abf4-797caceff3d9"",
@@ -59,37 +101,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""03b792e5-fe99-44eb-983b-c3210e2b2c4d"",
-                    ""path"": ""OneModifier"",
+                    ""name"": """",
+                    ""id"": ""7f3ed8f5-8e2a-4c3f-8a26-3489a3c38162"",
+                    ""path"": ""<DualShockGamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""JoinGame"",
-                    ""isComposite"": true,
+                    ""action"": ""ExitLobby"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""c6c1b590-368e-4b72-b827-a0df864237ba"",
-                    ""path"": ""<DualShockGamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""JoinGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""binding"",
-                    ""id"": ""e133155a-6c0b-4f0d-a458-76d02010f978"",
-                    ""path"": ""<DualShockGamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""JoinGame"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -111,7 +131,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_JoinGame = m_Player.FindAction("JoinGame", throwIfNotFound: true);
+        m_Player_JoinLobby = m_Player.FindAction("JoinLobby", throwIfNotFound: true);
+        m_Player_ExitLobby = m_Player.FindAction("ExitLobby", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,13 +193,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_JoinGame;
+    private readonly InputAction m_Player_JoinLobby;
+    private readonly InputAction m_Player_ExitLobby;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @JoinGame => m_Wrapper.m_Player_JoinGame;
+        public InputAction @JoinLobby => m_Wrapper.m_Player_JoinLobby;
+        public InputAction @ExitLobby => m_Wrapper.m_Player_ExitLobby;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -191,9 +214,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @JoinGame.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinGame;
-                @JoinGame.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinGame;
-                @JoinGame.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinGame;
+                @JoinLobby.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinLobby;
+                @JoinLobby.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinLobby;
+                @JoinLobby.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJoinLobby;
+                @ExitLobby.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
+                @ExitLobby.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
+                @ExitLobby.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -201,9 +227,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @JoinGame.started += instance.OnJoinGame;
-                @JoinGame.performed += instance.OnJoinGame;
-                @JoinGame.canceled += instance.OnJoinGame;
+                @JoinLobby.started += instance.OnJoinLobby;
+                @JoinLobby.performed += instance.OnJoinLobby;
+                @JoinLobby.canceled += instance.OnJoinLobby;
+                @ExitLobby.started += instance.OnExitLobby;
+                @ExitLobby.performed += instance.OnExitLobby;
+                @ExitLobby.canceled += instance.OnExitLobby;
             }
         }
     }
@@ -220,6 +249,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnJoinGame(InputAction.CallbackContext context);
+        void OnJoinLobby(InputAction.CallbackContext context);
+        void OnExitLobby(InputAction.CallbackContext context);
     }
 }

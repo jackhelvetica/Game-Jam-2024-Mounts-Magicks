@@ -18,7 +18,8 @@ public class PlayerControllers : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
-    public InputAction join;
+    public InputAction joinLobby;
+    public InputAction exitLobby;
 
     // Define a delegate for the event
     public delegate void JoinGameEventHandler(int controllerIndex);
@@ -40,14 +41,20 @@ public class PlayerControllers : MonoBehaviour
 
     void OnEnable()
     {
-        join = playerController.Player.JoinGame;
-        join.Enable();
-        join.performed += JoinGame;
+        joinLobby = playerController.Player.JoinLobby;
+        joinLobby.Enable();
+
+        exitLobby = playerController.Player.ExitLobby;
+        exitLobby.Enable();
+
     }
     void OnDisable()
     {
-        join.Disable();
+        joinLobby.Disable();
+
+        exitLobby.Disable();
     }
+
 
     void Update()
     {
@@ -74,16 +81,17 @@ public class PlayerControllers : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+        joinLobby.performed += JoinLobby;
+
     }
     
-    public void JoinGame(InputAction.CallbackContext context)
+    public void JoinLobby(InputAction.CallbackContext context)
     {
 
         string controllerName = context.control.device.name;
 
         int controllerIndex = controllersManager.GetControllerIndex(controllerName);
 
-        // Check if the action triggered is the Cross button
         if (context.performed) //if button is pressed
         {
             if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)

@@ -15,9 +15,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "JoinGame",
+                    "name": "JoinLobby",
                     "type": "Button",
                     "id": "47a1f951-d0ff-4507-ac3d-a0378978fe61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitLobby",
+                    "type": "Button",
+                    "id": "00014ce8-62ff-4732-807a-1215643a42b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -25,6 +34,39 @@
                 }
             ],
             "bindings": [
+                {
+                    "name": "One Modifier",
+                    "id": "03b792e5-fe99-44eb-983b-c3210e2b2c4d",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoinLobby",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Modifier",
+                    "id": "c6c1b590-368e-4b72-b827-a0df864237ba",
+                    "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoinLobby",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Binding",
+                    "id": "e133155a-6c0b-4f0d-a458-76d02010f978",
+                    "path": "<DualShockGamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoinLobby",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
                 {
                     "name": "",
                     "id": "0a4c08f5-2b8b-4d8e-abf4-797caceff3d9",
@@ -37,37 +79,15 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "One Modifier",
-                    "id": "03b792e5-fe99-44eb-983b-c3210e2b2c4d",
-                    "path": "OneModifier",
+                    "name": "",
+                    "id": "7f3ed8f5-8e2a-4c3f-8a26-3489a3c38162",
+                    "path": "<DualShockGamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "JoinGame",
-                    "isComposite": true,
+                    "action": "ExitLobby",
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "modifier",
-                    "id": "c6c1b590-368e-4b72-b827-a0df864237ba",
-                    "path": "<DualShockGamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "JoinGame",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "binding",
-                    "id": "e133155a-6c0b-4f0d-a458-76d02010f978",
-                    "path": "<DualShockGamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "JoinGame",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }
