@@ -18,7 +18,16 @@ public class PlayerControllers : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
-    public InputAction join;
+    public InputAction joinLobby;
+    public InputAction exitLobby;
+    public InputAction isReady;
+
+    // Define a delegate for the event
+    public delegate void JoinGameEventHandler(int controllerIndex);
+
+    // Define the event
+    public event JoinGameEventHandler OnJoinLobby;
+    public event JoinGameEventHandler OnExitLobby;
 
     public ControllersManager controllersManager;
 
@@ -34,14 +43,25 @@ public class PlayerControllers : MonoBehaviour
 
     void OnEnable()
     {
-        join = playerController.Player.JoinGame;
-        join.Enable();
-        join.performed += JoinGame;
+        joinLobby = playerController.Player.JoinLobby;
+        joinLobby.Enable();
+
+        exitLobby = playerController.Player.ExitLobby;
+        exitLobby.Enable();
+
+        isReady = playerController.Player.IsReady;
+        isReady.Enable();
+
     }
     void OnDisable()
     {
-        join.Disable();
+        joinLobby.Disable();
+
+        exitLobby.Disable();
+
+        isReady.Disable();
     }
+
 
     void Update()
     {
@@ -68,19 +88,69 @@ public class PlayerControllers : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+        joinLobby.performed += JoinLobby;
+        exitLobby.performed += ExitLobby;
+        isReady.performed += IsReady;
+
     }
     
-    public void JoinGame(InputAction.CallbackContext context)
+    public void JoinLobby(InputAction.CallbackContext context)
+    {
+
+        string controllerName = context.control.device.name;
+
+        int controllerIndex = controllersManager.GetControllerIndex(controllerName);
+
+        if (context.performed) //if button is pressed
+        {
+            if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
+            {
+                Debug.Log("L1 and R1 are pressed, the controller index is " + controllerIndex);
+                
+                // Check if the event is not null before invoking it
+                if (OnJoinLobby != null)
+                {
+                    OnJoinLobby(controllerIndex);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Invalid controller index: " + controllerIndex);
+            }
+        }
+    }
+
+    public void ExitLobby(InputAction.CallbackContext context)
     {
         string controllerName = context.control.device.name;
 
         int controllerIndex = controllersManager.GetControllerIndex(controllerName);
 
-        // Check if the action triggered is the Cross button
-        if (context.performed) //if button is pressed
+        if (context.performed)
         {
-            // Cross button is pressed, do something
-            Debug.Log("Cross button pressed, the controller index is" + controllersManager.activePS4Controllers[controllerIndex]);
+            if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
+            {
+                Debug.Log("Options button is pressed, the controller index is " + controllerIndex);
+
+                controllersManager.RemoveController(controllerName);
+                // Check if the event is not null before invoking it
+                if (OnExitLobby != null)
+                {
+                    OnExitLobby(controllerIndex);
+                }
+                else
+                {
+                    Debug.LogWarning("Invalid controller index: " + controllerIndex);
+                }
+            }
+        }
+    }
+    
+    public void IsReady(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+
         }
     }
 
