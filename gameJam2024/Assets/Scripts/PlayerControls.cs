@@ -53,6 +53,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IsReady"",
+                    ""type"": ""Button"",
+                    ""id"": ""094d7757-6c3b-4d80-b193-11310fafa4e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -110,6 +119,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""ExitLobby"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0162c071-9290-460c-b335-524c2fdb5707"",
+                    ""path"": ""<DualShockGamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IsReady"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -133,6 +153,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_JoinLobby = m_Player.FindAction("JoinLobby", throwIfNotFound: true);
         m_Player_ExitLobby = m_Player.FindAction("ExitLobby", throwIfNotFound: true);
+        m_Player_IsReady = m_Player.FindAction("IsReady", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -195,6 +216,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_JoinLobby;
     private readonly InputAction m_Player_ExitLobby;
+    private readonly InputAction m_Player_IsReady;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -202,6 +224,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @JoinLobby => m_Wrapper.m_Player_JoinLobby;
         public InputAction @ExitLobby => m_Wrapper.m_Player_ExitLobby;
+        public InputAction @IsReady => m_Wrapper.m_Player_IsReady;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -220,6 +243,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ExitLobby.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
                 @ExitLobby.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
                 @ExitLobby.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnExitLobby;
+                @IsReady.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIsReady;
+                @IsReady.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIsReady;
+                @IsReady.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIsReady;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -233,6 +259,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @ExitLobby.started += instance.OnExitLobby;
                 @ExitLobby.performed += instance.OnExitLobby;
                 @ExitLobby.canceled += instance.OnExitLobby;
+                @IsReady.started += instance.OnIsReady;
+                @IsReady.performed += instance.OnIsReady;
+                @IsReady.canceled += instance.OnIsReady;
             }
         }
     }
@@ -251,5 +280,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJoinLobby(InputAction.CallbackContext context);
         void OnExitLobby(InputAction.CallbackContext context);
+        void OnIsReady(InputAction.CallbackContext context);
     }
 }

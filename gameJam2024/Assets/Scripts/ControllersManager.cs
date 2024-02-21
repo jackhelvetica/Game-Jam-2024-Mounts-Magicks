@@ -55,6 +55,19 @@ public class ControllersManager : MonoBehaviour
         }
     }
 
+    public void RemoveController(string controllerName)
+    {
+        if (activePS4Controllers.Contains(controllerName))
+        {
+            activePS4Controllers.Remove(controllerName);
+            Debug.Log("Controller removed: " + controllerName);
+        }
+        else
+        {
+            Debug.LogWarning("Controller '" + controllerName + "' not found in activePS4Controllers.");
+        }
+    }
+
     public int GetControllerIndex(string controllerName)
     {
         if (string.IsNullOrEmpty(controllerName))

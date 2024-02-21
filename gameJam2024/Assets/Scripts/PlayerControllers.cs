@@ -20,12 +20,14 @@ public class PlayerControllers : MonoBehaviour
 
     public InputAction joinLobby;
     public InputAction exitLobby;
+    public InputAction isReady;
 
     // Define a delegate for the event
     public delegate void JoinGameEventHandler(int controllerIndex);
 
     // Define the event
-    public event JoinGameEventHandler OnJoinGame;
+    public event JoinGameEventHandler OnJoinLobby;
+    public event JoinGameEventHandler OnExitLobby;
 
     public ControllersManager controllersManager;
 
@@ -47,12 +49,17 @@ public class PlayerControllers : MonoBehaviour
         exitLobby = playerController.Player.ExitLobby;
         exitLobby.Enable();
 
+        isReady = playerController.Player.IsReady;
+        isReady.Enable();
+
     }
     void OnDisable()
     {
         joinLobby.Disable();
 
         exitLobby.Disable();
+
+        isReady.Disable();
     }
 
 
@@ -82,6 +89,8 @@ public class PlayerControllers : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
 
         joinLobby.performed += JoinLobby;
+        exitLobby.performed += ExitLobby;
+        isReady.performed += IsReady;
 
     }
     
@@ -99,15 +108,49 @@ public class PlayerControllers : MonoBehaviour
                 Debug.Log("L1 and R1 are pressed, the controller index is " + controllerIndex);
                 
                 // Check if the event is not null before invoking it
-                if (OnJoinGame != null)
+                if (OnJoinLobby != null)
                 {
-                    OnJoinGame(controllerIndex);
+                    OnJoinLobby(controllerIndex);
                 }
             }
             else
             {
                 Debug.LogWarning("Invalid controller index: " + controllerIndex);
             }
+        }
+    }
+
+    public void ExitLobby(InputAction.CallbackContext context)
+    {
+        string controllerName = context.control.device.name;
+
+        int controllerIndex = controllersManager.GetControllerIndex(controllerName);
+
+        if (context.performed)
+        {
+            if (controllerIndex >= 0 && controllerIndex < controllersManager.activePS4Controllers.Count)
+            {
+                Debug.Log("Options button is pressed, the controller index is " + controllerIndex);
+
+                controllersManager.RemoveController(controllerName);
+                // Check if the event is not null before invoking it
+                if (OnExitLobby != null)
+                {
+                    OnExitLobby(controllerIndex);
+                }
+                else
+                {
+                    Debug.LogWarning("Invalid controller index: " + controllerIndex);
+                }
+            }
+        }
+    }
+    
+    public void IsReady(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+
         }
     }
 

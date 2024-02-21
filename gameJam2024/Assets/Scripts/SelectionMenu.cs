@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class SelectionMenu : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class SelectionMenu : MonoBehaviour
         playerControllers = FindObjectOfType<PlayerControllers>();
 
         // Subscribe to the OnJoinGame event
-        playerControllers.OnJoinGame += UpdateAvatarImage;
+        playerControllers.OnJoinLobby += EnableAvatarImage;
+        playerControllers.OnExitLobby += DisableAvatarImage;
     }
 
     // Update is called once per frame
@@ -32,9 +34,10 @@ public class SelectionMenu : MonoBehaviour
     private void OnDestroy()
     {
         // Unsubscribe from the OnJoinGame event
-        playerControllers.OnJoinGame -= UpdateAvatarImage;
+        playerControllers.OnJoinLobby -= EnableAvatarImage;
+        playerControllers.OnExitLobby -= DisableAvatarImage;
     }
-    private void UpdateAvatarImage(int controllerIndex)
+    private void EnableAvatarImage(int controllerIndex)
     {
         // Update UI avatar image based on the controller index
         switch (controllerIndex)
@@ -55,5 +58,32 @@ public class SelectionMenu : MonoBehaviour
                 Debug.LogWarning("Invalid controller index: " + controllerIndex);
                 break;
         }
+    }
+
+    private void DisableAvatarImage(int controllerIndex)
+    {
+        switch (controllerIndex)
+        {
+            case 0:
+                player1AvatarImage.gameObject.SetActive(false);
+                break;
+            case 1:
+                player2AvatarImage.gameObject.SetActive(false);
+                break;
+            case 2:
+                player3AvatarImage.gameObject.SetActive(false);
+                break;
+            case 3:
+                player4AvatarImage.gameObject.SetActive(false);
+                break;
+            default:
+                Debug.LogWarning("Invalid controller index: " + controllerIndex);
+                break;
+        }
+    }
+
+    public void GoToMainGame()
+    {
+        //SceneManager.LoadScene()
     }
 }
