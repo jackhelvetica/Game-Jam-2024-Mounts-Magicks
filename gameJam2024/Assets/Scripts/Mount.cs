@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//[RequireComponent(typeof(CharacterController))]
 public class Mount : MonoBehaviour
 {
     //Input System
@@ -19,6 +20,7 @@ public class Mount : MonoBehaviour
     //Others
     public Transform spawnPointA;
     public Healthbar healthbarScript;
+    //private CharacterController controller;
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class Mount : MonoBehaviour
 
     void Start()
     {
+        //controller = gameObject.GetComponent<CharacterController>();
     }
     
     void Update()
