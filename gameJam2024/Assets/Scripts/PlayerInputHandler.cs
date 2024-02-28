@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    public GameObject mountPrefab;
+    public GameObject playerPrefab;
     PlayerControllerNew playerControllerNew;
 
     Vector3 startPos = new Vector3(0, 0, 0);
 
     private void Awake()
     {
-        if (mountPrefab != null)
+        if (playerPrefab != null)
         {
-            playerControllerNew = GameObject.Instantiate(mountPrefab, startPos, transform.rotation).GetComponent<PlayerControllerNew>();
+            playerControllerNew = GameObject.Instantiate(playerPrefab, startPos, transform.rotation).GetComponent<PlayerControllerNew>();
             transform.parent = playerControllerNew.transform;
         }
     }

@@ -127,4 +127,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6460924355c973f47ac5d524b5930262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mountPrefab: {fileID: 6858093076937422440, guid: d53c58aabecb1484e805b52b2d4307b0, type: 3}
+  playerPrefab: {fileID: 6858093076937422440, guid: d53c58aabecb1484e805b52b2d4307b0, type: 3}

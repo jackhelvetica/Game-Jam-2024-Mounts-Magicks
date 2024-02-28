@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3845802908960946775}
   - component: {fileID: 3845802908960946777}
   m_Layer: 0
-  m_Name: MountInput
+  m_Name: MountRiderInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3845802908960946774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 9.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -139,4 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6460924355c973f47ac5d524b5930262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 2001571983733631404, guid: eea9b4d79ed03a44ca41a5d69c645acc, type: 3}
+  playerPrefab: {fileID: 3906834855580657156, guid: 17b0a7d238b3cc844ada544cd95398d4, type: 3}
