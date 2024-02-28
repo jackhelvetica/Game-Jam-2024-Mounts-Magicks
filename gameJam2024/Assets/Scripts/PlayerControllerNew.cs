@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerControllerNew : MonoBehaviour
 {
     private CharacterController controller;
@@ -11,9 +12,9 @@ public class PlayerControllerNew : MonoBehaviour
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
 
-    private void Start()
+    private void Awake()
     {
-        controller = gameObject.AddComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
