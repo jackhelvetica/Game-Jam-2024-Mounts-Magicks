@@ -239,9 +239,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playersList:
   - {fileID: 3845802908960946774, guid: 0241fedfd0cc10d41b4163b27200a0ad, type: 3}
+  - {fileID: 3845802908960946774, guid: 0c3908a84de649345838fb0e21ef17b7, type: 3}
   - {fileID: 3845802908960946774, guid: 0241fedfd0cc10d41b4163b27200a0ad, type: 3}
-  - {fileID: 3845802908960946774, guid: 0241fedfd0cc10d41b4163b27200a0ad, type: 3}
-  - {fileID: 3845802908960946774, guid: 0241fedfd0cc10d41b4163b27200a0ad, type: 3}
+  - {fileID: 3845802908960946774, guid: 0c3908a84de649345838fb0e21ef17b7, type: 3}
 --- !u!1 &730059466
 GameObject:
   m_ObjectHideFlags: 0

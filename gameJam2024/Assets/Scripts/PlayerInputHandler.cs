@@ -8,7 +8,7 @@ public class PlayerInputHandler : MonoBehaviour
     public GameObject playerPrefab;
     PlayerControllerNew playerControllerNew;
 
-    Vector3 spawnPoint = new Vector3(0, 0, 0);
+    Vector3 spawnPoint = new Vector3(0, 1, 0);
 
     private void Awake()
     {
