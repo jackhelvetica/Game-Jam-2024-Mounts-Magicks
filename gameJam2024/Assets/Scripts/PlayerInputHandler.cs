@@ -8,11 +8,14 @@ public class PlayerInputHandler : MonoBehaviour
     public GameObject mountPrefab;
     PlayerControllerNew playerControllerNew;
 
+    Vector3 startPos = new Vector3(0, 0, 0);
+
     private void Awake()
     {
         if (mountPrefab != null)
         {
-            playerControllerNew = mountPrefab.GetComponent<PlayerControllerNew>();
+            playerControllerNew = GameObject.Instantiate(mountPrefab, startPos, transform.rotation).GetComponent<PlayerControllerNew>();
+            transform.parent = playerControllerNew.transform;
         }
     }
 
