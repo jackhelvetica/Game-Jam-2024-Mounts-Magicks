@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,30 +17,46 @@ public class Rider : MonoBehaviour
     //Skill
     public ManaBar manaBarScript;
     public Animator riderAnimator;
+    public GameObject attackZone;
 
     //Others
-    public GameObject marker;
+    public GameObject weapon;
+    public GameObject hand;
+    //public GameObject marker;
     
-
     private void Awake()
     {
         riderInput = new RiderInput();
     }
 
     void Start()
-    {
-        
+    {       
     }
 
     void Update()
     {
         Look();
+        HoldWeapon();
         Attach();
     }
 
     public void Attach()
-    {
-        transform.position = marker.transform.position;
+    {        
+        if (gameObject.CompareTag("Player1"))
+        {
+            GameObject markerA = GameObject.Find("MarkerA");
+            transform.position = markerA.transform.position;
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            GameObject markerB = GameObject.Find("MarkerB");
+            transform.position = markerB.transform.position;
+        }
+    }
+
+    public void HoldWeapon()
+    {        
+        weapon.transform.parent = hand.transform;
     }
 
     public void Look()
@@ -54,23 +71,32 @@ public class Rider : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
         }
+
+        if (input.x > 0 || input.y > 0)
+        {
+            attackZone.SetActive(true);
+        }
+        else
+        {
+            attackZone.SetActive(false);
+        }
     }
 
     public void RiderSkill(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {            
+        {
+            Debug.Log("Rider uses skill!");
             manaBarScript.UseMana();
             if (ManaBar.useMana)
             {
-                riderAnimator.SetTrigger("Swing");
+                riderAnimator.SetTrigger("Attack");
                 KnockBack.activateKnockback = true;
                 ManaBar.useMana = false;
             }                     
         }
     }
 
-    
     private void OnEnable()
     {
         look = riderInput.Player.Look;

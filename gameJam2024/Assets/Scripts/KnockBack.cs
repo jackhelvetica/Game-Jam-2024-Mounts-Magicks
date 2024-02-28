@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class KnockBack : MonoBehaviour
 {
-    public float knockbackForce = 100f;
+    private float knockbackForce = 10f;
+    private float upwardForce = 10f;
     public static bool activateKnockback;
     void Start()
     {
@@ -24,10 +25,16 @@ public class KnockBack : MonoBehaviour
 
             if (opponentRb != null)
             {
+                //Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
+                //opponentRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+
                 Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
-                opponentRb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+                Vector3 knockbackForceVector = new Vector3(knockbackDirection.x, 0, knockbackDirection.z);
+                opponentRb.AddForce(knockbackForceVector * knockbackForce, ForceMode.Impulse);
+                opponentRb.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
+
                 activateKnockback = false;
             }
-        }        
+        }                
     }
 }

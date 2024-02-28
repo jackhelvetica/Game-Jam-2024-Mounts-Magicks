@@ -22,7 +22,7 @@ public class ManaBar : MonoBehaviour
     }
 
     public void ManaRegen()
-    {        
+    {
         if (manaBar.value < maxMana)
         {
             manaBar.value += waitTime * Time.deltaTime;

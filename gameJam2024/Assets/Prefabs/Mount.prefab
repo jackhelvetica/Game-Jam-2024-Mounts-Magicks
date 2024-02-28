@@ -238,7 +238,7 @@ MonoBehaviour:
   rb: {fileID: 2713499332177742451}
   moveSpeed: 20
   rotateSpeed: 400
-  spawnPointA: {fileID: 0}
+  spawnPoint: {fileID: 0}
   healthbarScript: {fileID: 0}
 --- !u!1 &2713499332752535769
 GameObject:

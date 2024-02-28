@@ -13,7 +13,7 @@ public class CharacterSwitcher : MonoBehaviour
     private void Start()
     {
         playerInputManager = GetComponent<PlayerInputManager>();
-        index = Random.Range(0, playersList.Count);
+        //index = Random.Range(0, playersList.Count);
         playerInputManager.playerPrefab = playersList[index];
     }
 
@@ -25,7 +25,13 @@ public class CharacterSwitcher : MonoBehaviour
 
     public void SwitchNextSpawnCharacter(PlayerInput input)
     {
-        index = Random.Range(0, playersList.Count);
+        Debug.Log("Index = " + index);
+        //index = Random.Range(0, playersList.Count);
+        index++;
+        if (index >= 3)
+        {
+            index = 3;
+        }
         playerInputManager.playerPrefab = playersList[index];
     }
 }
