@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 1204129176}
   m_Layer: 0
   m_Name: LeftSpawn
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 1386407927}
   m_Layer: 0
   m_Name: RightSpawn
-  m_TagString: Untagged
+  m_TagString: SpawnPoint
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
