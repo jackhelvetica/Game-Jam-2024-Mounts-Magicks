@@ -11,6 +11,8 @@ public class ControllersManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(this);
+
         // Detect currently connected controllers
         string[] joystickNames = Input.GetJoystickNames();
 
@@ -41,7 +43,7 @@ public class ControllersManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     void DisplayActiveControllers()

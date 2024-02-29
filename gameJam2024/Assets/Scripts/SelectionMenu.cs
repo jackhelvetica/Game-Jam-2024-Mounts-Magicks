@@ -14,6 +14,11 @@ public class SelectionMenu : MonoBehaviour
     public Image player3AvatarImage;
     public Image player4AvatarImage;
 
+    public static bool activateRiderA = false;
+    public static bool activateMountA = false;
+    public static bool activateRiderB = false;    
+    public static bool activateMountB = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,15 +49,19 @@ public class SelectionMenu : MonoBehaviour
         {
             case 0:
                 player1AvatarImage.gameObject.SetActive(true);
+                activateRiderA = true;
                 break;
             case 1:
                 player2AvatarImage.gameObject.SetActive(true);
+                activateMountA = true;
                 break;
             case 2:
                 player3AvatarImage.gameObject.SetActive(true);
+                activateRiderB = true;
                 break;
             case 3:
                 player4AvatarImage.gameObject.SetActive(true);
+                activateMountB = true;
                 break;
             default:
                 Debug.LogWarning("Invalid controller index: " + controllerIndex);
@@ -84,6 +93,6 @@ public class SelectionMenu : MonoBehaviour
 
     public void GoToMainGame()
     {
-        //SceneManager.LoadScene()
+        SceneManager.LoadScene(1);
     }
 }

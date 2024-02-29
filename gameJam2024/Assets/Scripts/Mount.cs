@@ -14,10 +14,11 @@ public class Mount : MonoBehaviour
     public Rigidbody rb;
     private Vector2 input;
     public float moveSpeed = 20f;
-    public float rotateSpeed = 400f;
+    public float rotateSpeed = 200f;
 
     //Others
-    public Transform spawnPointA;
+    private Vector3 spawnPointA = new Vector3(-15, 2, 0);
+    private Vector3 spawnPointB = new Vector3(15, 2, 0);
     public Healthbar healthbarScript;
 
     private void Awake()
@@ -27,6 +28,16 @@ public class Mount : MonoBehaviour
 
     void Start()
     {
+        if (gameObject.CompareTag("Player1"))
+        {
+            Debug.Log("Player 1 spawned!");
+            transform.position = spawnPointA;
+        }
+        else if (gameObject.CompareTag("Player2"))
+        {
+            Debug.Log("Player 2 spawned!");
+            transform.position = spawnPointB;
+        }
     }
     
     void Update()
@@ -67,7 +78,14 @@ public class Mount : MonoBehaviour
         {
             Debug.Log("Player fell off");
             healthbarScript.health--;
-            transform.position = spawnPointA.position;
+            if (gameObject.CompareTag("Player1"))
+            {
+                transform.position = spawnPointA;
+            }
+            else if (gameObject.CompareTag("Player2"))
+            {
+                transform.position = spawnPointB;
+            }
         }
     }
 

@@ -4827,7 +4827,7 @@ GameObject:
   - component: {fileID: 8102850388527548819}
   - component: {fileID: 8102850388527548818}
   m_Layer: 0
-  m_Name: Rider
+  m_Name: TempRider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4928,6 +4928,8 @@ MonoBehaviour:
   rotateSpeed: 400
   manaBarScript: {fileID: 0}
   riderAnimator: {fileID: 8102850386884871813}
+  weapon: {fileID: 0}
+  hand: {fileID: 0}
   marker: {fileID: 0}
 --- !u!114 &8102850388527548818
 MonoBehaviour:
@@ -4954,10 +4956,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 89fa6648-b45a-410c-a21e-4ca4f85aa81b
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: be73f1ff-4ac3-49cc-a8d6-81ce4ef8c523
@@ -5155,4 +5153,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0564652760032dc498d55461923159f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 30
