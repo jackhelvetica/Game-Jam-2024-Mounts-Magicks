@@ -6,13 +6,8 @@ using UnityEngine.InputSystem;
 
 public class Mount : MonoBehaviour
 {
-    //Input System
-    public MountInput mountInput;
-    private InputAction move;
-
     //Movement
     public Rigidbody rb;
-    private Vector2 input;
     public float moveSpeed = 20f;
     public float rotateSpeed = 200f;
 
@@ -20,11 +15,6 @@ public class Mount : MonoBehaviour
     private Vector3 spawnPointA = new Vector3(-15, 2, 0);
     private Vector3 spawnPointB = new Vector3(15, 2, 0);
     public Healthbar healthbarScript;
-
-    private void Awake()
-    {
-        mountInput = new MountInput();
-    }
 
     void Start()
     {
@@ -42,16 +32,13 @@ public class Mount : MonoBehaviour
     
     void Update()
     {
-    }
-
-    private void FixedUpdate()
-    {
         MoveMount();
     }
     public void MoveMount()
     {
-        input = move.ReadValue<Vector2>();       
-
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
+        print(transform.parent.parent.gameObject.name + " input " + input);
         Vector3 direction = new Vector3(input.x, 0, input.y);
         direction.Normalize();
 
@@ -87,15 +74,5 @@ public class Mount : MonoBehaviour
                 transform.position = spawnPointB;
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        move = mountInput.Player.Move;
-        move.Enable();
-    }
-    private void OnDisable()
-    {
-        move.Disable();
     }
 }

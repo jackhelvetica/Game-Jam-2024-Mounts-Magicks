@@ -28,9 +28,9 @@ public class CharacterSwitcher : MonoBehaviour
         Debug.Log("Index = " + index);
         //index = Random.Range(0, playersList.Count);
         index++;
-        if (index >= 3)
+        if (index >= 1)
         {
-            index = 3;
+            index = 1;
         }
         playerInputManager.playerPrefab = playersList[index];
     }

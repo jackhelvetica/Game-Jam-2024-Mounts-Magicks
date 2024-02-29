@@ -6,11 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Rider : MonoBehaviour
 {
-    //Input System
-    public RiderInput riderInput;
-    private InputAction look;
-    private Vector2 input;
-
     //Look
     public float rotateSpeed = 400f;
 
@@ -22,16 +17,7 @@ public class Rider : MonoBehaviour
     //Others
     public GameObject weapon;
     public GameObject hand;
-    //public GameObject marker;
-    
-    private void Awake()
-    {
-        riderInput = new RiderInput();
-    }
-
-    void Start()
-    {       
-    }
+    public GameObject marker;
 
     void Update()
     {
@@ -41,17 +27,18 @@ public class Rider : MonoBehaviour
     }
 
     public void Attach()
-    {        
-        if (gameObject.CompareTag("Player1"))
-        {
-            GameObject markerA = GameObject.Find("MarkerA");
-            transform.position = markerA.transform.position;
-        }
-        else if (gameObject.CompareTag("Player2"))
-        {
-            GameObject markerB = GameObject.Find("MarkerB");
-            transform.position = markerB.transform.position;
-        }
+    {
+        //if (gameObject.CompareTag("Player1"))
+        //{
+        //    GameObject markerA = GameObject.Find("MarkerA");
+        //    transform.position = markerA.transform.position;
+        //}
+        //else if (gameObject.CompareTag("Player2"))
+        //{
+        //    GameObject markerB = GameObject.Find("MarkerB");
+        //    transform.position = markerB.transform.position;
+        //}
+        transform.position = marker.transform.position;
     }
 
     public void HoldWeapon()
@@ -61,7 +48,8 @@ public class Rider : MonoBehaviour
 
     public void Look()
     {
-        input = look.ReadValue<Vector2>();
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        Vector2 input = playerInput.actions["Look"].ReadValue<Vector2>();
 
         Vector3 direction = new Vector3(input.x, 0, input.y);
         direction.Normalize();
@@ -95,15 +83,5 @@ public class Rider : MonoBehaviour
                 ManaBar.useMana = false;
             }                     
         }
-    }
-
-    private void OnEnable()
-    {
-        look = riderInput.Player.Look;
-        look.Enable();
-    }
-    private void OnDisable()
-    {
-        look.Disable();
     }
 }
