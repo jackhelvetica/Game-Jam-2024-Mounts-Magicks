@@ -28,13 +28,16 @@ public class Mount : MonoBehaviour
             Debug.Log("Player 2 spawned!");
             transform.position = spawnPointB;
         }
+
+        Mount[] mounts = FindObjectsOfType<Mount>();
+        int playerId = mounts.Length - 1;
+        print(transform.parent.parent.gameObject.name + " " +playerId);
+        Healthbar[] healthBars = FindObjectsOfType<Healthbar>();
+        Debug.Assert(healthBars.Length == 2);
+        healthbarScript = healthBars[playerId];
     }
     
     void Update()
-    {
-        MoveMount();
-    }
-    public void MoveMount()
     {
         PlayerInput playerInput = GetComponent<PlayerInput>();
         Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
