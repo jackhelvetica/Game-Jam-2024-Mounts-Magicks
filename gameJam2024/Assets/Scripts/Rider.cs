@@ -18,7 +18,23 @@ public class Rider : MonoBehaviour
     public GameObject weapon;
     public GameObject hand;
     public GameObject marker;
+    public GameManager gameManagerScript;
+    private KnockBack knockbackScript;
 
+    private void Start()
+    {
+        //Knockback
+        knockbackScript = GetComponent<KnockBack>();
+
+        //Assign Manabar to Rider
+        Rider[] riders = FindObjectsOfType<Rider>();
+        int playerId = riders.Length - 1;
+        //print(transform.gameObject.name + " " + playerId);
+        ManaBar[] manaBars = FindObjectsOfType<ManaBar>();
+        Debug.Assert(manaBars.Length == 2);
+        manaBarScript = manaBars[playerId];
+        //print(manaBars[playerId].name);
+    }
     void Update()
     {
         Look();
@@ -28,16 +44,6 @@ public class Rider : MonoBehaviour
 
     public void Attach()
     {
-        //if (gameObject.CompareTag("Player1"))
-        //{
-        //    GameObject markerA = GameObject.Find("MarkerA");
-        //    transform.position = markerA.transform.position;
-        //}
-        //else if (gameObject.CompareTag("Player2"))
-        //{
-        //    GameObject markerB = GameObject.Find("MarkerB");
-        //    transform.position = markerB.transform.position;
-        //}
         transform.position = marker.transform.position;
     }
 

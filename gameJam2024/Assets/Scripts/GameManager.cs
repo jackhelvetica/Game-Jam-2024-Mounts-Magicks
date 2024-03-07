@@ -5,42 +5,16 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject riderA;
-    public GameObject mountA;
-    public GameObject riderB;
-    public GameObject mountB;
+    public List<GameObject> manaBars = new List<GameObject>();
+    public List<GameObject> healthBars = new List<GameObject>();
+    public List<PlayerInput> playerId = new List<PlayerInput>();
 
     void Start()
-    {
-    }
-
-    void Update()
     {
         
     }
 
-    public void SwitchNextSpawnCharacter()
+    void Update()
     {
-
-    }
-
-    public void SpawnPlayers()
-    {
-        if (SelectionMenu.activateRiderA)
-        {
-            riderA.SetActive(true);
-        }
-        if (SelectionMenu.activateMountA)
-        {
-            mountA.SetActive(true);
-        }
-        if (SelectionMenu.activateRiderB)
-        {
-            riderB.SetActive(true);
-        }
-        if (SelectionMenu.activateRiderB)
-        {
-            mountB.SetActive(true);
-        }
     }
 }
