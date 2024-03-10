@@ -115,7 +115,7 @@ public partial class @RiderInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1d86996e-fe9c-40eb-bd70-3d4051d7deb0"",
+                    ""id"": ""595db546-5718-455f-a383-62e46e05c895"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -126,7 +126,7 @@ public partial class @RiderInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0d39f335-488f-466f-9603-78e8d9cd2103"",
+                    ""id"": ""c057df32-3d1f-4b08-82fe-3a6122ac36a6"",
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -137,7 +137,7 @@ public partial class @RiderInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5f9d9f31-985e-4573-a36e-a12cf3648713"",
+                    ""id"": ""89917fdb-3bef-4452-a329-66b2c26b4f2c"",
                     ""path"": ""<Joystick>/{Hatswitch}"",
                     ""interactions"": """",
                     ""processors"": """",

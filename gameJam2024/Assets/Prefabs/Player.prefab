@@ -628,7 +628,6 @@ MonoBehaviour:
   n_hitDirectionForce: 22
   n_constForce: 1
   n_inputForce: 2
-  tr: {fileID: 1673158137530471857}
 --- !u!114 &9045997114994163677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,8 +653,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
