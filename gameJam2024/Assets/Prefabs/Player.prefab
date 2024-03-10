@@ -492,7 +492,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3117421730814429668}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -504,7 +504,8 @@ TrailRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 2100000, guid: da57f403b7cfbf548acad7c9e6cb5c4a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -525,7 +526,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -534,7 +535,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -555,7 +556,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.25157225, b: 0.25157225, a: 1}
+      key0: {r: 1, g: 0.077518955, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -563,16 +564,16 @@ TrailRenderer:
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 39321
+      ctime0: 12914
+      ctime1: 57632
       ctime2: 0
       ctime3: 0
       ctime4: 0
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 39321
+      atime0: 11565
+      atime1: 57825
       atime2: 0
       atime3: 0
       atime4: 0
@@ -619,10 +620,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0564652760032dc498d55461923159f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackTime: 0.4
-  hitDirectionForce: 22
-  constForce: 3
-  inputForce: 1
+  c_knockbackTime: 0.4
+  c_hitDirectionForce: 22
+  c_constForce: 3
+  c_inputForce: 2
+  n_knockbackTime: 0.4
+  n_hitDirectionForce: 22
+  n_constForce: 1
+  n_inputForce: 2
+  tr: {fileID: 1673158137530471857}
 --- !u!114 &9045997114994163677
 MonoBehaviour:
   m_ObjectHideFlags: 0

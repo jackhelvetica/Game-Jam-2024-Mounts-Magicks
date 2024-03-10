@@ -21,7 +21,6 @@ public class Mount : MonoBehaviour
     public KnockBack knockbackScript;
     private int radius = 5;
     public TrailRenderer tr;
-    private bool isKnockbacked = false;
 
     void Start()
     {
@@ -53,6 +52,10 @@ public class Mount : MonoBehaviour
         {
             Move();
         }
+        if (IsGrounded())
+        {
+            tr.emitting = false;
+        }
     }
 
     public void Move()
@@ -81,12 +84,14 @@ public class Mount : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {       
         //Falling off platform
         if (other.CompareTag("Death"))
         {
             Debug.Log("Player fell off");
+            tr.emitting = false;
             healthbarScript.health--;
+            
             if (gameObject.CompareTag("Player1"))
             {
                 transform.position = spawnPointA;
@@ -100,21 +105,21 @@ public class Mount : MonoBehaviour
         }
     }
 
-    public void GetCriticalKnockbacked(Vector3 hitDirection)
+    public void GetCriticalKnockbacked(Vector3 knockbackDirection)
     {
-        Vector3 upForce = new Vector3(0, 10, 0);
-
         tr.emitting = true;
-        knockbackScript.CallCriticalKnockback(hitDirection, upForce, input);
+
+        Vector3 upForce = new Vector3(0, 10, 0);
+        knockbackScript.CallCriticalKnockback(knockbackDirection, upForce, input);
         Debug.Log("Critical hit!");
-        tr.emitting = false;
+        
     }
 
-    public void GetNormalKnockbacked(Vector3 hitDirection)
+    public void GetNormalKnockbacked(Vector3 knockbackDirection)
     {
-        Vector3 upForce = new Vector3(0, 2, 0);
+        Vector3 upForce = new Vector3(0, 1, 0);
 
-        knockbackScript.NormalKnockback(hitDirection);
+        knockbackScript.CallNormalKnockback(knockbackDirection, upForce, input);
         Debug.Log("Normal hit!");
 
     }
