@@ -14,6 +14,7 @@ public class KnockBack : MonoBehaviour
     public float inputForce = 7.5f; //Player's input affect knockback
     private Rigidbody rb;
     private Coroutine knockbackCoroutine;
+
     void Start()
     {
         activateKnockback = false;
@@ -22,7 +23,7 @@ public class KnockBack : MonoBehaviour
 
     public bool isBeingKnockedBack { get; private set; }
 
-    public IEnumerator KnockbackAction(Vector3 hitDirection, Vector3 constantForceDirection, Vector3 inputDirection)
+    public IEnumerator CriticalKnockbackAction(Vector3 hitDirection, Vector3 constantForceDirection, Vector3 inputDirection)
     {
         isBeingKnockedBack = true;
 
@@ -34,39 +35,44 @@ public class KnockBack : MonoBehaviour
         hitForce = hitDirection * hitDirectionForce;
         constantForce = constantForceDirection * constForce;
 
-        //Timer
         float elapsedTime = 0f;
-        while (elapsedTime < knockbackTime)
+        while(elapsedTime < knockbackTime)
         {
-            //Iterate timer
+            //iterate the timer
             elapsedTime += Time.fixedDeltaTime;
 
-            //Combine hitForce and constantForce
+            //combine hitForce and constantForce
             knockbackForce = hitForce + constantForce;
 
-            //Combine knockbackForce with input force
             if (inputDirection != Vector3.zero)
             {
-                combinedForce = knockbackForce + (inputDirection * inputForce);
+                combinedForce = knockbackForce + inputDirection;
             }
             else
             {
                 combinedForce = knockbackForce;
             }
 
-            //Apply knockback
             rb.velocity = combinedForce;
 
             yield return new WaitForFixedUpdate();
-        }
+        }     
+
+        //Combine hitForce and constantForce
+        rb.velocity = hitForce + constantForce + (inputDirection * inputForce);
 
         isBeingKnockedBack = false;
     }
 
-    public void CallKnockback(Vector3 hitDirection, Vector3 constantForceDirection, Vector3 inputDirection)
+    public void CallCriticalKnockback(Vector3 hitDirection, Vector3 constantForceDirection, Vector3 inputDirection)
     {
-        knockbackCoroutine = StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));
-        Debug.Log("Start knockback");
+        knockbackCoroutine = StartCoroutine(CriticalKnockbackAction(hitDirection, constantForceDirection, inputDirection));
+    }
+
+    public void NormalKnockback(Vector3 knockbackDirection)
+    {
+        float hitForce = 100f;
+        rb.AddForce(knockbackDirection * hitForce);
     }
 
     //private void OnTriggerEnter(Collider other)

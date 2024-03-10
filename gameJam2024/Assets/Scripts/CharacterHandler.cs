@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterSwitcher : MonoBehaviour
+public class CharacterHandler : MonoBehaviour
 {
     int index = 0;
     [SerializeField] List<GameObject> playersList = new List<GameObject>();
@@ -34,7 +34,6 @@ public class CharacterSwitcher : MonoBehaviour
     {
         if (index == 0)
         {
-            Debug.Log("Player 1 joined");
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Player1";
@@ -42,7 +41,6 @@ public class CharacterSwitcher : MonoBehaviour
         }
         else if (index == 1)
         {
-            Debug.Log("Player 1 joined");
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Player1";
@@ -50,7 +48,6 @@ public class CharacterSwitcher : MonoBehaviour
         }
         else if (index == 2)
         {
-            Debug.Log("Player 2 joined");
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Player2";
@@ -58,7 +55,6 @@ public class CharacterSwitcher : MonoBehaviour
         }
         else if (index == 3)
         {
-            Debug.Log("Player 2 joined");
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Player2";

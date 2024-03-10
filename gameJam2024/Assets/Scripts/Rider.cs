@@ -18,14 +18,9 @@ public class Rider : MonoBehaviour
     public GameObject weapon;
     public GameObject hand;
     public GameObject marker;
-    public GameManager gameManagerScript;
-    private KnockBack knockbackScript;
 
     private void Start()
     {
-        //Knockback
-        knockbackScript = GetComponent<KnockBack>();
-
         //Assign Manabar to Rider
         Rider[] riders = FindObjectsOfType<Rider>();
         int playerId = riders.Length - 1;
@@ -66,7 +61,7 @@ public class Rider : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
         }
 
-        if (input.x > 0 || input.y > 0)
+        if (input != Vector2.zero)
         {
             attackZone.SetActive(true);
         }
@@ -80,7 +75,6 @@ public class Rider : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Rider uses skill!");
             manaBarScript.UseMana();
             if (ManaBar.useMana)
             {

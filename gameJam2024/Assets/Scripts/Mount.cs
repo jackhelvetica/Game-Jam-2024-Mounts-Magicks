@@ -16,8 +16,12 @@ public class Mount : MonoBehaviour
     private Vector3 spawnPointA = new Vector3(-15, 2, 0);
     private Vector3 spawnPointB = new Vector3(15, 2, 0);
     public Healthbar healthbarScript;
-    public GameManager gameManagerScript;
+
+    //Knockback
     public KnockBack knockbackScript;
+    private int radius = 5;
+    public TrailRenderer tr;
+    private bool isKnockbacked = false;
 
     void Start()
     {
@@ -96,11 +100,28 @@ public class Mount : MonoBehaviour
         }
     }
 
-    public void GetKnockbacked(Vector3 hitDirection)
+    public void GetCriticalKnockbacked(Vector3 hitDirection)
     {
         Vector3 upForce = new Vector3(0, 10, 0);
-        knockbackScript.CallKnockback(hitDirection, upForce, input);
-        Debug.Log("Getting knockbacked!");
+
+        tr.emitting = true;
+        knockbackScript.CallCriticalKnockback(hitDirection, upForce, input);
+        Debug.Log("Critical hit!");
+        tr.emitting = false;
+    }
+
+    public void GetNormalKnockbacked(Vector3 hitDirection)
+    {
+        Vector3 upForce = new Vector3(0, 2, 0);
+
+        knockbackScript.NormalKnockback(hitDirection);
+        Debug.Log("Normal hit!");
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 
     public bool IsGrounded()
