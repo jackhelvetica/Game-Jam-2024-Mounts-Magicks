@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hammer : MonoBehaviour
 {
     public GameObject mount;
+    public GameObject rider;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,12 +14,12 @@ public class Hammer : MonoBehaviour
             Rigidbody opponentRb = other.GetComponent<Rigidbody>();
             Mount opponentMount = other.GetComponent<Mount>();
 
-            if (opponentRb != null)
+            if (opponentRb != null && other.tag != rider.tag)
             {
                 float distance = Vector3.Distance(mount.transform.position, other.transform.position);
-                Debug.Log("Distance is " + distance);
-                Debug.Log("My position is " + mount.transform.position);
-                Debug.Log("Opponent's position is " + other.transform.position);
+                //Debug.Log("Distance is " + distance);
+                //Debug.Log("My position is " + mount.transform.position);
+                //Debug.Log("Opponent's position is " + other.transform.position);
                 if (distance <= 6f)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;

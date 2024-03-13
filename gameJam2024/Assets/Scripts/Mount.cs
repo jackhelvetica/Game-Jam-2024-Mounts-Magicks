@@ -24,6 +24,8 @@ public class Mount : MonoBehaviour
 
     void Start()
     {
+        tr.emitting = false;
+
         if (gameObject.CompareTag("Player1"))
         {
             Debug.Log("Player 1 spawned!");
