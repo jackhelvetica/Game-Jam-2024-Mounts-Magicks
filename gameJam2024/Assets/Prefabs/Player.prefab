@@ -447,19 +447,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6a0491702a2e6c24a9af03af431ad87c, type: 3}
   m_PrefabInstance: {fileID: 3856171422034650790}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &6671399272163098706
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126061057929010167}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.5764446, y: 2.8427565, z: 14.36619}
-  m_Center: {x: 0.23129974, y: 0.4993025, z: -1.2463931}
 --- !u!54 &6859450654540199053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -476,72 +463,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3559268843559466434
-MonoBehaviour:
+--- !u!65 &6671399272163098706
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4126061057929010167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 333484f850a0c2a49bf8af7731cdd129, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
---- !u!114 &1537957140347707173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126061057929010167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33a663e09b8fedd4b9df9a9619a8160e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6859450654540199053}
-  healthbarScript: {fileID: 0}
-  knockbackScript: {fileID: 7488169015477921051}
-  tr: {fileID: 6211443576143816676}
---- !u!114 &7488169015477921051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4126061057929010167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0564652760032dc498d55461923159f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  c_knockbackTime: 0.4
-  c_hitDirectionForce: 22
-  c_constForce: 3
-  c_inputForce: 2
-  n_knockbackTime: 0.4
-  n_hitDirectionForce: 22
-  n_constForce: 1
-  n_inputForce: 2
+  serializedVersion: 2
+  m_Size: {x: 4.5764446, y: 2.8427565, z: 14.36619}
+  m_Center: {x: 0.23129974, y: 0.4993025, z: -1.2463931}
 --- !u!96 &6211443576143816676
 TrailRenderer:
   serializedVersion: 2
@@ -650,6 +584,93 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 0
+--- !u!95 &8973998122131328063
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126061057929010167}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d798ab6f78021046a53e78f3705ac39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1537957140347707173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126061057929010167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a663e09b8fedd4b9df9a9619a8160e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 6859450654540199053}
+  mountAnimator: {fileID: 8973998122131328063}
+  healthbarScript: {fileID: 0}
+  knockbackScript: {fileID: 7488169015477921051}
+  tr: {fileID: 6211443576143816676}
+--- !u!114 &3559268843559466434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126061057929010167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 333484f850a0c2a49bf8af7731cdd129, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &7488169015477921051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126061057929010167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0564652760032dc498d55461923159f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  c_knockbackTime: 0.4
+  c_hitDirectionForce: 22
+  c_constForce: 3
+  c_inputForce: 2
+  n_knockbackTime: 0.4
+  n_hitDirectionForce: 22
+  n_constForce: 1
+  n_inputForce: 2
 --- !u!1001 &5416832867376976804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -679,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c1d2215025285843bc0a705a6305c07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.67
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8c1d2215025285843bc0a705a6305c07, type: 3}
       propertyPath: m_LocalPosition.z

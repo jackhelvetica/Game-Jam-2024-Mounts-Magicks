@@ -11,6 +11,7 @@ public class Mount : MonoBehaviour
     private float moveSpeed = 12f;
     private float rotateSpeed = 470f;
     private Vector2 input;
+    public Animator mountAnimator;
 
     //Others
     private Vector3 spawnPointA = new Vector3(-15, 2, 0);
@@ -50,18 +51,25 @@ public class Mount : MonoBehaviour
     void Update()
     {
         //Cannot move while being knockbacked
-        if (!knockbackScript.isBeingKnockedBack)
+        if (!knockbackScript.isBeingKnockedBack) //Not being knockbacked
         {
             Move();
+            
+        }
+        else //Being knockbacked
+        {
+            mountAnimator.SetBool("Move", false);
+            //mountAnimator.SetBool("Knockback", true);
         }
         if (IsGrounded())
         {
             tr.emitting = false;
+            //mountAnimator.SetBool("Knockback", false);
         }
     }
 
     public void Move()
-    {
+    {        
         PlayerInput playerInput = GetComponent<PlayerInput>();
         input = playerInput.actions["Move"].ReadValue<Vector2>();
         //print(transform.parent.parent.gameObject.name + " input " + input);
@@ -72,8 +80,14 @@ public class Mount : MonoBehaviour
 
         if (direction != Vector3.zero)
         {
+            mountAnimator.SetBool("Move", true);
+
             Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotateSpeed * Time.deltaTime);
+        }
+        else
+        {
+            mountAnimator.SetBool("Move", false);
         }
     }
 
