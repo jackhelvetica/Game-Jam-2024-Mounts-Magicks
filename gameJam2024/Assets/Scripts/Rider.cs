@@ -17,7 +17,7 @@ public class Rider : MonoBehaviour
     //Others
     public GameObject weapon;
     public GameObject hand;
-    public GameObject marker;
+    //public GameObject marker;
 
     private void Start()
     {
@@ -39,7 +39,17 @@ public class Rider : MonoBehaviour
 
     public void Attach()
     {
-        transform.position = marker.transform.position;
+        if (gameObject.CompareTag("Rider1"))
+        {
+            GameObject marker1 = GameObject.FindWithTag("Marker1");
+            transform.position = marker1.transform.position;
+        }
+        else if (gameObject.CompareTag("Rider2"))
+        {
+            GameObject marker2 = GameObject.FindWithTag("Marker2");
+            transform.position = marker2.transform.position;
+        }
+        
     }
 
     public void HoldWeapon()

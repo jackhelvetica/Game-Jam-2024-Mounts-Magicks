@@ -11,6 +11,9 @@ public class CharacterHandler : MonoBehaviour
     private Vector3 spawnPointA = new Vector3(-15, 2, 0);
     private Vector3 spawnPointB = new Vector3(15, 2, 0);
 
+    public List<GameObject> playersList = new List<GameObject>();
+    PlayerInputManager playerInputManager;
+
     //Character select screen
     public Image characterSelectScreen;
     public Image mountA_UI;
@@ -22,7 +25,9 @@ public class CharacterHandler : MonoBehaviour
     void Start()
     {
         characterSelectScreen.enabled = true;
-        Debug.Log("Create your team");
+
+        playerInputManager = GetComponent<PlayerInputManager>();
+        playerInputManager.playerPrefab = playersList[index];
     }
 
     public void AddPlayer(PlayerInput player)
@@ -32,32 +37,39 @@ public class CharacterHandler : MonoBehaviour
         {
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.tag = "Player1";
+            player.tag = "Mount1";
             mountA_UI.enabled = true;
             index++;
+            playerInputManager.playerPrefab = playersList[index];
         }
         else if (index == 1)
         {
-            player.transform.position = spawnPointB;
+            player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            player.tag = "Player1";
+            player.tag = "Rider1";
             riderA_UI.enabled = true;
             index++;
+            playerInputManager.playerPrefab = playersList[index];
         }
         else if (index == 2)
         {
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
-            player.tag = "Player2";
+            player.tag = "Mount2";
             mountB_UI.enabled = true;
             index++;
+            playerInputManager.playerPrefab = playersList[index];
         }
         else if (index == 3)
         {
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
-            player.tag = "Player2";
+            player.tag = "Rider2";
             riderB_UI.enabled = true;
+        }
+        else if (index > 3)
+        {
+            index = 3;
         }
 
     }

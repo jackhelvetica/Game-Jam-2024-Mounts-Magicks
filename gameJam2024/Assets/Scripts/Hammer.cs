@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-    public GameObject mount;
+    private GameObject mount;
     public GameObject rider;
 
+    private void Start()
+    {
+        //Assign Mount to Hammer
+        if (rider.CompareTag("Rider1"))
+        {
+            mount = GameObject.FindGameObjectWithTag("Mount1");
+        }
+        else if (rider.CompareTag("Rider2"))
+        {
+            mount = GameObject.FindGameObjectWithTag("Mount2");
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (KnockBack.activateKnockback)
@@ -14,7 +26,7 @@ public class Hammer : MonoBehaviour
             Rigidbody opponentRb = other.GetComponent<Rigidbody>();
             Mount opponentMount = other.GetComponent<Mount>();
 
-            if (opponentRb != null && other.tag != rider.tag)
+            if (opponentRb != null && other.tag != mount.tag)
             {
                 float distance = Vector3.Distance(mount.transform.position, other.transform.position);
                 //Debug.Log("Distance is " + distance);

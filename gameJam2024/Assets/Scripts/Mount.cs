@@ -27,15 +27,17 @@ public class Mount : MonoBehaviour
     {
         tr.emitting = false;
 
-        if (gameObject.CompareTag("Player1"))
+        if (gameObject.CompareTag("Mount1"))
         {
-            Debug.Log("Player 1 spawned!");
             transform.position = spawnPointA;
+            GameObject marker = transform.Find("Marker").gameObject;
+            marker.tag = "Marker1";
         }
-        else if (gameObject.CompareTag("Player2"))
+        else if (gameObject.CompareTag("Mount2"))
         {
-            Debug.Log("Player 2 spawned!");
             transform.position = spawnPointB;
+            GameObject marker = transform.Find("Marker").gameObject;
+            marker.tag = "Marker2";
         }
 
         //Assign Healthbar to Mount
@@ -108,12 +110,12 @@ public class Mount : MonoBehaviour
             tr.emitting = false;
             healthbarScript.health--;
             
-            if (gameObject.CompareTag("Player1"))
+            if (gameObject.CompareTag("Mount1"))
             {
                 transform.position = spawnPointA;
                 transform.rotation = Quaternion.Euler(0, 90, 0);
             }
-            else if (gameObject.CompareTag("Player2"))
+            else if (gameObject.CompareTag("Mount2"))
             {
                 transform.position = spawnPointB;
                 transform.rotation = Quaternion.Euler(0, 270, 0);

@@ -1561,7 +1561,7 @@ GameObject:
   - component: {fileID: 723633987}
   - component: {fileID: 723633986}
   m_Layer: 0
-  m_Name: Background
+  m_Name: BlackBackground
   m_TagString: Death
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3434,6 +3434,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6407aeadab37d9743a853071e14db2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playersList:
+  - {fileID: 2493556628404974802, guid: 0024972266381d94588cd3d297c4d93c, type: 3}
+  - {fileID: 2493556628404974802, guid: 6280d6fe82aef0a4d9c6b1128c9c1df0, type: 3}
+  - {fileID: 2493556628404974802, guid: 0024972266381d94588cd3d297c4d93c, type: 3}
+  - {fileID: 2493556628404974802, guid: 6280d6fe82aef0a4d9c6b1128c9c1df0, type: 3}
   characterSelectScreen: {fileID: 1357963241}
   mountA_UI: {fileID: 498445720}
   riderA_UI: {fileID: 662344772}
