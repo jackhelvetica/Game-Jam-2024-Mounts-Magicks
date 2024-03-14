@@ -43,6 +43,7 @@ public class Rider : MonoBehaviour
         {
             GameObject marker1 = GameObject.FindWithTag("Marker1");
             transform.position = marker1.transform.position;
+            //transform.parent.GetComponentInChildren<Mount>()
         }
         else if (gameObject.CompareTag("Rider2"))
         {
