@@ -8,11 +8,12 @@ TagManager:
   - SpawnPoint
   - Player1
   - Player2
-  - Marker
-  - Rider1
-  - Rider2
+  - Marker1
+  - Marker2
   - Mount1
   - Mount2
+  - Rider1
+  - Rider2
   layers:
   - Default
   - TransparentFX
