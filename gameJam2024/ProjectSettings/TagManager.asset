@@ -9,6 +9,10 @@ TagManager:
   - Player1
   - Player2
   - Marker
+  - Rider1
+  - Rider2
+  - Mount1
+  - Mount2
   layers:
   - Default
   - TransparentFX
