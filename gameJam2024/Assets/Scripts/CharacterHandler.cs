@@ -8,8 +8,8 @@ public class CharacterHandler : MonoBehaviour
 {
     //Spawn characters
     int index = 0;
-    private Vector3 spawnPointA = new Vector3(-15, 2, 0);
-    private Vector3 spawnPointB = new Vector3(15, 2, 0);
+    private Vector3 spawnPointA = new Vector3(-15, 3, 0);
+    private Vector3 spawnPointB = new Vector3(15, 3, 0);
 
     public List<GameObject> playersList = new List<GameObject>();
     PlayerInputManager playerInputManager;

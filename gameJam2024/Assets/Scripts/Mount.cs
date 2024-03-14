@@ -14,8 +14,8 @@ public class Mount : MonoBehaviour
     public Animator mountAnimator;
 
     //Others
-    private Vector3 spawnPointA = new Vector3(-15, 2, 0);
-    private Vector3 spawnPointB = new Vector3(15, 2, 0);
+    private Vector3 spawnPointA = new Vector3(-15, 3, 0);
+    private Vector3 spawnPointB = new Vector3(15, 3, 0);
     public Healthbar healthbarScript;
 
     //Knockback
