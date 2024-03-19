@@ -15,17 +15,17 @@ public class CharacterHandler : MonoBehaviour
     PlayerInputManager playerInputManager;
 
     //Character select screen
-    public Image characterSelectScreen;
-    public Image mountA_UI;
-    public Image riderA_UI;
-    public Image mountB_UI;
-    public Image riderB_UI;
+    public List<GameObject> playersImageList = new List<GameObject>();
+    public List<PlayerInput> playerInputList = new List<PlayerInput>();
+    public GameObject characterSelectScreen;
+    public Button readyButton;
     
-
     void Start()
     {
-        characterSelectScreen.enabled = true;
+        characterSelectScreen.SetActive(true);
+        readyButton.interactable = false;
 
+        //Spawn characters
         playerInputManager = GetComponent<PlayerInputManager>();
         playerInputManager.playerPrefab = playersList[index];
     }
@@ -38,7 +38,10 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Mount1";
-            mountA_UI.enabled = true;
+
+            playersImageList[index].SetActive(true);
+            playerInputList.Add(player);
+
             index++;
             playerInputManager.playerPrefab = playersList[index];
         }
@@ -47,16 +50,22 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Rider1";
-            riderA_UI.enabled = true;
+
+            playersImageList[index].SetActive(true);
+            playerInputList.Add(player);
+
             index++;
             playerInputManager.playerPrefab = playersList[index];
         }
         else if (index == 2)
-        {
+        {            
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
-            player.tag = "Mount2";
-            mountB_UI.enabled = true;
+            player.tag = "Rider2";
+
+            playersImageList[index].SetActive(true);
+            playerInputList.Add(player);
+
             index++;
             playerInputManager.playerPrefab = playersList[index];
         }
@@ -64,13 +73,28 @@ public class CharacterHandler : MonoBehaviour
         {
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
-            player.tag = "Rider2";
-            riderB_UI.enabled = true;
+            player.tag = "Mount2";
+
+            playersImageList[index].SetActive(true);
+            playerInputList.Add(player);
         }
         else if (index > 3)
         {
             index = 3;
         }
+    }
 
+    public void ResetPlayers()
+    {
+        index = 0;
+        foreach (var playerImage in playersImageList)
+        {
+            playerImage.SetActive(false);
+        }
+        foreach (var playerInput in playerInputList)
+        {
+            Destroy(playerInput);
+        }
+        playerInputList.Clear();
     }
 }
