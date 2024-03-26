@@ -22,10 +22,12 @@ public class CharacterHandler : MonoBehaviour
     public List<PlayerInput> playerInputList = new List<PlayerInput>();
     public GameObject characterSelectScreen;
     public Button readyButton;
+    private bool isReady = false;
 
     //Countdown
     public List<GameObject> countdownObjects = new List<GameObject>();
-    
+    private Image countdownObjectImage;
+     
     void Start()
     {
         characterSelectScreen.SetActive(true);
@@ -36,6 +38,16 @@ public class CharacterHandler : MonoBehaviour
         playerInputManager.playerPrefab = playersList[index];
     }
 
+    private void Update()
+    {
+        if (index == 4 && !isReady)
+        {
+            isReady = true;
+            readyButton.interactable = true;
+            readyButton.Select();
+        }
+    }
+
     public void AddPlayer(PlayerInput player)
     {
         Debug.Log("Add player");
@@ -44,7 +56,7 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Mount1";
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.DeactivateInput();
 
             playersImageList[index].SetActive(true);
             playerInputList.Add(player);
@@ -57,7 +69,7 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Rider1";
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.DeactivateInput();
 
             playersImageList[index].SetActive(true);
             playerInputList.Add(player);
@@ -70,7 +82,7 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Rider2";
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.DeactivateInput();
 
             playersImageList[index].SetActive(true);
             playerInputList.Add(player);
@@ -83,22 +95,18 @@ public class CharacterHandler : MonoBehaviour
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Mount2";
-            player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            player.DeactivateInput();
 
             playersImageList[index].SetActive(true);
             playerInputList.Add(player);
 
             index++;
         }
-        else if (index == 4)
-        {
-            readyButton.interactable = true;
-            readyButton.Select();
-        }
     }
 
     public void Ready()
     {
+        Debug.Log("READY");
         characterSelectScreen.SetActive(false);
         StartCoroutine(Countdown(3));
     }
@@ -111,28 +119,43 @@ public class CharacterHandler : MonoBehaviour
         int punchVibrato = 0;
         float punchElasticity = 0;
 
+        //Countdown
         int count = seconds; //count = 3;
         while (count > -1) //will stop once count = 0
         {
+            Debug.Log("Starting in... " + count + "...");
             countdownObjects[count].SetActive(true);
-            countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
-            yield return new WaitForSeconds(1);
-            countdownObjects[count].SetActive(false);
-            count--;
+            if (count > 0) //3...2...1...
+            {
+                countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
+                yield return new WaitForSeconds(1);
+                countdownObjects[count].SetActive(false);
+                count--;
+            }
+            else if (count == 0) //GO!
+            {
+                Debug.Log("Make GO! disppear");
+                countdownObjectImage = countdownObjects[count].GetComponent<Image>();
+                DG.Tweening.Sequence goObjectSequence = DOTween.Sequence();
+                    goObjectSequence.Append(countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity));
+                    goObjectSequence.Append(countdownObjectImage.DOFade(0, 1f));
+                yield return new WaitForSeconds(2);
+                countdownObjects[count].SetActive(false);
+                count--;
+            }          
         }
 
-        //countdownObjects[count].spriteRenderer.DOFade(0, 1);
-
         //Start game
-        //foreach (var playerInput in playerInputList)
-        //{
-        //    //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        //    //Freeze rotation x and z
-        //}     
+        foreach (var playerInput in playerInputList)
+        {
+            Debug.Log("GAME START!");
+            playerInput.ActivateInput();
+        }          
     }
 
     public void ResetPlayers()
     {
+        Debug.Log("Reset Players");
         index = 0;
         foreach (var playerImage in playersImageList)
         {

@@ -48,9 +48,15 @@ public class Rider : MonoBehaviour
         else if (gameObject.CompareTag("Rider2"))
         {
             GameObject marker2 = GameObject.FindWithTag("Marker2");
-            transform.position = marker2.transform.position;
-        }
-        
+            if (marker2 == null)
+            {
+                return;
+            }
+            else
+            {
+                transform.position = marker2.transform.position;
+            }                             
+        }       
     }
 
     public void HoldWeapon()

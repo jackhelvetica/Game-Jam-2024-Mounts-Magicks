@@ -23,6 +23,10 @@ public class Mount : MonoBehaviour
     private int radius = 5;
     public TrailRenderer tr;
 
+    //Dash
+    private float dashTime = 0.2f;
+    private float dashSpeed = 30f;
+
     void Start()
     {
         tr.emitting = false;
@@ -98,7 +102,25 @@ public class Mount : MonoBehaviour
         if (context.performed)
         {
             Debug.Log("Mount uses skill!");
+            StartCoroutine(Dash());
         }       
+    }
+
+    IEnumerator Dash()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + dashTime)
+        {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            input = playerInput.actions["Move"].ReadValue<Vector2>();
+            //print(transform.parent.parent.gameObject.name + " input " + input);
+            Vector3 direction = new Vector3(input.x, 0, input.y);
+            direction.Normalize();
+
+            transform.Translate(direction * dashSpeed * Time.deltaTime, Space.World);
+
+            yield return null;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

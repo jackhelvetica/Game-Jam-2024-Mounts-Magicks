@@ -26,7 +26,7 @@ public class Hammer : MonoBehaviour
             Rigidbody opponentRb = other.GetComponent<Rigidbody>();
             Mount opponentMount = other.GetComponent<Mount>();
 
-            if (opponentRb != null && other.tag != mount.tag)
+            if (opponentRb != null && other.tag != mount.tag) //prevent hitting yourself
             {
                 float distance = Vector3.Distance(mount.transform.position, other.transform.position);
                 //Debug.Log("Distance is " + distance);
