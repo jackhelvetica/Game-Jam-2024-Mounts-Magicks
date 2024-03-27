@@ -1,17 +1,26 @@
 fileFormatVersion: 2
-guid: 959f9469adafd3b49a1e113797c3e581
+guid: 5f55efe1190951a45bcb8a93863d357f
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
+  - first:
+      74: -9172222345264503212
+    second: Rider_Idle
+  - first:
+      74: -8618951174490062874
+    second: Rider_Damaged
+  - first:
+      74: 4923836143531618782
+    second: Rider_Fall
+  - first:
+      74: -5486381221531988080
+    second: Rider_Win
   - first:
       74: 6946266141509008197
     second: Rider_Attack
   - first:
       74: -5485414659909605793
     second: rig.001|Rider_Fall
-  - first:
-      74: -2052088554247559888
-    second: rig.001|Rider_Rest
   externalObjects: {}
   materials:
     materialImportMode: 2
