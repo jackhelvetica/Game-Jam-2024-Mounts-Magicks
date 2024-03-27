@@ -18,6 +18,10 @@ public class Mount : MonoBehaviour
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
     public Healthbar healthbarScript;
 
+    //Colour
+    public Material blueMat;
+    public GameObject mountMesh;
+
     //Knockback
     public KnockBack knockbackScript;
     private int radius = 5;
@@ -39,9 +43,13 @@ public class Mount : MonoBehaviour
         }
         else if (gameObject.CompareTag("Mount2"))
         {
+            //Marker
             transform.position = spawnPointB;
             GameObject marker = transform.Find("Marker").gameObject;
             marker.tag = "Marker2";
+
+            //Colour
+            mountMesh.GetComponent<Renderer>().material = blueMat;
         }
 
         //Assign Healthbar to Mount

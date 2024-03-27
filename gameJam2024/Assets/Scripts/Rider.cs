@@ -14,10 +14,13 @@ public class Rider : MonoBehaviour
     public Animator riderAnimator;
     public GameObject attackZone;
 
+    //Colour
+    public Material blueMat;
+    public GameObject riderMesh;
+
     //Others
     public GameObject weapon;
     public GameObject hand;
-    //public GameObject marker;
 
     private void Start()
     {
@@ -28,7 +31,7 @@ public class Rider : MonoBehaviour
         ManaBar[] manaBars = FindObjectsOfType<ManaBar>();
         Debug.Assert(manaBars.Length == 2);
         manaBarScript = manaBars[playerId];
-        //print(manaBars[playerId].name);
+        //print(manaBars[playerId].name); 
     }
     void Update()
     {
@@ -47,15 +50,19 @@ public class Rider : MonoBehaviour
         }
         else if (gameObject.CompareTag("Rider2"))
         {
+            //Marker
             GameObject marker2 = GameObject.FindWithTag("Marker2");
-            if (marker2 == null)
+            if (marker2 == null) //rider is spawned before mount so we need this
             {
                 return;
             }
             else
             {
                 transform.position = marker2.transform.position;
-            }                             
+            }
+
+            //Colour
+            riderMesh.GetComponent<Renderer>().material = blueMat;
         }       
     }
 

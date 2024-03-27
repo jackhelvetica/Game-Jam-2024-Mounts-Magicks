@@ -7,6 +7,9 @@ public class Hammer : MonoBehaviour
     private GameObject mount;
     public GameObject rider;
 
+    //Colour
+    public Material blueMat;
+
     private void Start()
     {
         //Assign Mount to Hammer
@@ -17,6 +20,9 @@ public class Hammer : MonoBehaviour
         else if (rider.CompareTag("Rider2"))
         {
             mount = GameObject.FindGameObjectWithTag("Mount2");
+
+            //Colour
+            GetComponent<Renderer>().material = blueMat;
         }
     }
     private void OnTriggerEnter(Collider other)

@@ -23,6 +23,7 @@ public class CharacterHandler : MonoBehaviour
     public GameObject characterSelectScreen;
     public Button readyButton;
     private bool isReady = false;
+    public static bool gameStart = false;
 
     //Countdown
     public List<GameObject> countdownObjects = new List<GameObject>();
@@ -108,6 +109,7 @@ public class CharacterHandler : MonoBehaviour
     {
         Debug.Log("READY");
         characterSelectScreen.SetActive(false);
+        gameStart = true;
         StartCoroutine(Countdown(3));
     }
 

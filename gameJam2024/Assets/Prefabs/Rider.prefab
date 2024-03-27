@@ -186,9 +186,14 @@ PrefabInstance:
     - target: {fileID: 4569285318935780043, guid: 959f9469adafd3b49a1e113797c3e581, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b6fbc2d063f4120418fdea674a7a7a0b, type: 2}
+      objectReference: {fileID: 2100000, guid: 2bea4e2062acd684c9741eb42dfc1125, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 959f9469adafd3b49a1e113797c3e581, type: 3}
+--- !u!1 &56219745146595513 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7606798011910994564, guid: 959f9469adafd3b49a1e113797c3e581, type: 3}
+  m_PrefabInstance: {fileID: 1632697860744457669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619401312060709111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7048119965433678542, guid: 959f9469adafd3b49a1e113797c3e581, type: 3}
@@ -240,6 +245,8 @@ MonoBehaviour:
   manaBarScript: {fileID: 0}
   riderAnimator: {fileID: 8105313511544448093}
   attackZone: {fileID: 357765112665040117}
+  blueMat: {fileID: 2100000, guid: b6fbc2d063f4120418fdea674a7a7a0b, type: 2}
+  riderMesh: {fileID: 56219745146595513}
   weapon: {fileID: 8947684042017623664}
   hand: {fileID: 619401312060709111}
 --- !u!114 &7000564567809288831
@@ -398,7 +405,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5dc98cf88635bb9438e88dd7e65e57c4, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6f3995350fabb7e40b1d8087da64aa15, type: 2}
+      objectReference: {fileID: 2100000, guid: c2737be652c4e394098e2beb0cd3f519, type: 2}
     - target: {fileID: 919132149155446097, guid: 5dc98cf88635bb9438e88dd7e65e57c4, type: 3}
       propertyPath: m_Name
       value: LongSword
@@ -436,3 +443,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rider: {fileID: 1903311648391401620}
+  blueMat: {fileID: 2100000, guid: 6f3995350fabb7e40b1d8087da64aa15, type: 2}
