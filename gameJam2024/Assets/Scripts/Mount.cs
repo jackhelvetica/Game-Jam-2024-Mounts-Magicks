@@ -14,9 +14,10 @@ public class Mount : MonoBehaviour
     public Animator mountAnimator;
 
     //Others
+    public Healthbar healthbarScript;
+    private GameManager gameManagerScript;
     private Vector3 spawnPointA = new Vector3(-15, 3, 0);
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
-    public Healthbar healthbarScript;
 
     //Colour
     public Material blueMat;
@@ -33,6 +34,8 @@ public class Mount : MonoBehaviour
 
     void Start()
     {
+        gameManagerScript = FindObjectOfType<GameManager>();
+
         tr.emitting = false;
 
         if (gameObject.CompareTag("Mount1"))
@@ -139,17 +142,15 @@ public class Mount : MonoBehaviour
             Debug.Log("Player fell off");
             tr.emitting = false;
             healthbarScript.health--;
-            
+
             if (gameObject.CompareTag("Mount1"))
             {
-                transform.position = spawnPointA;
-                transform.rotation = Quaternion.Euler(0, 90, 0);
+                gameManagerScript.Respawn(gameObject);
             }
             else if (gameObject.CompareTag("Mount2"))
             {
-                transform.position = spawnPointB;
-                transform.rotation = Quaternion.Euler(0, 270, 0);
-            }
+                gameManagerScript.Respawn(gameObject);
+            }           
         }
     }
 

@@ -135,6 +135,10 @@ PrefabInstance:
       value: Mount
       objectReference: {fileID: 0}
     - target: {fileID: 1043681820957149458, guid: 6a0491702a2e6c24a9af03af431ad87c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1043681820957149458, guid: 6a0491702a2e6c24a9af03af431ad87c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 088b4047d7e190f4ab271960ed82fdcf, type: 2}
@@ -177,8 +181,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.5764446, y: 2.8427565, z: 14.36619}
-  m_Center: {x: 0.23129974, y: 0.4993025, z: -1.2463931}
+  m_Size: {x: 4.5764446, y: 2.8427565, z: 11.529127}
+  m_Center: {x: 0.23129968, y: 0.49930257, z: -0.92973584}
 --- !u!96 &6211443576143816676
 TrailRenderer:
   serializedVersion: 2
@@ -326,6 +330,9 @@ MonoBehaviour:
   mountMesh: {fileID: 4555075746460406840}
   knockbackScript: {fileID: 7488169015477921051}
   tr: {fileID: 6211443576143816676}
+  invincibilityLength: 1
+  playerRenderer: {fileID: 4321265879503105972}
+  flashLength: 0.1
 --- !u!114 &3559268843559466434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +443,11 @@ MonoBehaviour:
   n_hitDirectionForce: 22
   n_constForce: 1
   n_inputForce: 2
+--- !u!137 &4321265879503105972 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1043681820957149458, guid: 6a0491702a2e6c24a9af03af431ad87c, type: 3}
+  m_PrefabInstance: {fileID: 3856171422034650790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4555075746460406840 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8451780699150191970, guid: 6a0491702a2e6c24a9af03af431ad87c, type: 3}

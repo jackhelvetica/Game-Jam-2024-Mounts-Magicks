@@ -23,7 +23,8 @@ public class CharacterHandler : MonoBehaviour
     public GameObject characterSelectScreen;
     public Button readyButton;
     private bool isReady = false;
-    public static bool gameStart = false;
+    public static bool setUI = false;
+    public static bool setGameManager = false;
 
     //Countdown
     public List<GameObject> countdownObjects = new List<GameObject>();
@@ -109,7 +110,8 @@ public class CharacterHandler : MonoBehaviour
     {
         Debug.Log("READY");
         characterSelectScreen.SetActive(false);
-        gameStart = true;
+        setUI = true;
+        setGameManager = true;
         StartCoroutine(Countdown(3));
     }
 

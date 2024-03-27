@@ -17,14 +17,14 @@ public class AttachUI : MonoBehaviour
 
     void Update()
     {
-        if (CharacterHandler.gameStart)
+        if (CharacterHandler.setUI)
         {
             player1 = GameObject.FindWithTag("Rider1");
             player2 = GameObject.FindWithTag("Rider2");
             player1Transform = player1.transform;
             player2Transform = player2.transform;
 
-            CharacterHandler.gameStart = false;
+            CharacterHandler.setUI = false;
         }
 
         if (player1Transform != null && player2Transform != null)
