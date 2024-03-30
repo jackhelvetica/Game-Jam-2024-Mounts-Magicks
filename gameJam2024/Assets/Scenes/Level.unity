@@ -1048,7 +1048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1092,7 +1092,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 302610ff83312124a81d21d1a6c03109, type: 2}
     - target: {fileID: 919132149155446097, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_Name
-      value: environ pillar (1)
+      value: environ pillar_02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
@@ -1120,6 +1120,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
+--- !u!95 &185892919
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185892915}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71cb8352fc5f4af42ab7a38a3b1aceed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &191739012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1225,7 +1245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.4
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1269,7 +1289,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 302610ff83312124a81d21d1a6c03109, type: 2}
     - target: {fileID: 919132149155446097, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_Name
-      value: environ pillar (2)
+      value: environ pillar_03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
@@ -1297,6 +1317,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
+--- !u!95 &232129173
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232129169}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e884016a540849048944dc4ffb0b6f24, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &259012913
 GameObject:
   m_ObjectHideFlags: 0
@@ -4492,7 +4532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4536,7 +4576,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 302610ff83312124a81d21d1a6c03109, type: 2}
     - target: {fileID: 919132149155446097, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_Name
-      value: environ pillar
+      value: environ pillar_01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
@@ -4564,6 +4604,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
+--- !u!95 &1344057583
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344057581}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3ba48c365f63cc349b87bf45ae37163f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1349706815
 GameObject:
   m_ObjectHideFlags: 0
@@ -4869,7 +4929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4913,7 +4973,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 302610ff83312124a81d21d1a6c03109, type: 2}
     - target: {fileID: 919132149155446097, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_Name
-      value: environ pillar (4)
+      value: environ pillar_05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
@@ -4941,6 +5001,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
+--- !u!95 &1455530576
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455530572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52dc9a80f96974841b43762e6e75081e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1460554470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6726,7 +6806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.4
+      value: -4.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6770,7 +6850,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 302610ff83312124a81d21d1a6c03109, type: 2}
     - target: {fileID: 919132149155446097, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
       propertyPath: m_Name
-      value: environ pillar (3)
+      value: environ pillar_04
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
@@ -6798,6 +6878,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: cc9480b2a5d81a94888da8f91295ffee, type: 3}
+--- !u!95 &2044387409
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044387405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6d6842b4ca6ab4348b5faa73403b25c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2063219159
 GameObject:
   m_ObjectHideFlags: 0
