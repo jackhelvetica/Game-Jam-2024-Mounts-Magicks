@@ -6947,6 +6947,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Activate
+    clip: {fileID: 8300000, guid: a043ae38cacfaf74f9268417d8fd0c3c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &2050392437
 Transform:
   m_ObjectHideFlags: 0

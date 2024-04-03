@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public float flashLength = 0.1f;
     public bool isInvincible = false;
 
+    //Round management
+    public static int roundNumber = 1;
+
     void Update()
     {
         if (CharacterHandler.setGameManager)
@@ -107,4 +110,20 @@ public class GameManager : MonoBehaviour
             flashCounter = flashLength;
         }
     }   
+
+    public void NextRound()
+    {
+        roundNumber++;
+        //"Round over!" text appear
+        //Make scoreboard appear
+        //Add a mark on the winner
+        //Select "next round" button
+        //Close scoreboard
+    }
+    public void EndGame()
+    {
+        //Happens when round = 4
+        //Go to win scene
+        //In win scene, instantiate prefab of winner and play animation on loop. Add "Player X wins!"
+    }
 }

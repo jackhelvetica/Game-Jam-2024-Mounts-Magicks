@@ -130,13 +130,17 @@ public class Mount : MonoBehaviour
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
         {
+            tr.emitting = true;
+
             rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);            
 
             yield return null;
         }
-        yield return new WaitForSeconds(1f);
-        detectKnockbackCounter = 0;
-
+        
+        yield return new WaitForSeconds(0.2f);
+        tr.emitting = false;
+        yield return new WaitForSeconds(0.8f);
+        detectKnockbackCounter = 0;       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -144,7 +148,6 @@ public class Mount : MonoBehaviour
         //Falling off platform
         if (other.CompareTag("Death"))
         {
-            Debug.Log("Player fell off");
             FindObjectOfType<AudioManagerScript>().Play("Crowd Cheering");
             tr.emitting = false;
             healthbarScript.health--;
