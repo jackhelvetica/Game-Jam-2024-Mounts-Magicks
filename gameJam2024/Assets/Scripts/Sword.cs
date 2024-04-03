@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hammer : MonoBehaviour
+public class Sword : MonoBehaviour
 {
     private GameObject mount;
     public GameObject rider;
 
     //Colour
     public Material blueMat;
+
+    //Knockback
+    public bool detectKnockback = false;
+
+    //static doesn't work because you have 2 mounts and 2 riders!
 
     private void Start()
     {
@@ -38,16 +43,20 @@ public class Hammer : MonoBehaviour
                 //Debug.Log("Distance is " + distance);
                 //Debug.Log("My position is " + mount.transform.position);
                 //Debug.Log("Opponent's position is " + other.transform.position);
-                if (distance <= 6f)
+                Debug.Log("Detect knockback mount is " + detectKnockback);
+
+                if (distance <= 9f && detectKnockback)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetCriticalKnockbacked(knockbackDirection);
+                    FindObjectOfType<AudioManagerScript>().Play("Critical Hit");
                 }
-                if (distance > 6f)
+                else if (distance > 0f)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetNormalKnockbacked(knockbackDirection);
-                }               
+                    FindObjectOfType<AudioManagerScript>().Play("Normal Hit");
+                }           
             }
 
             KnockBack.activateKnockback = false;

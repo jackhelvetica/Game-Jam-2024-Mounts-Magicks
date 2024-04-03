@@ -1502,7 +1502,6 @@ GameObject:
   - component: {fileID: 285502246}
   - component: {fileID: 285502247}
   - component: {fileID: 285502248}
-  - component: {fileID: 285502249}
   m_Layer: 5
   m_Name: ManaBarA
   m_TagString: Untagged
@@ -1528,7 +1527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 36.799988, y: 25.650024}
+  m_AnchoredPosition: {x: 36.80005, y: 25.650024}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &285502247
@@ -1599,22 +1598,6 @@ MonoBehaviour:
   manaAmount: 0
   manaCharge: 10
   waitTime: 4.5
---- !u!114 &285502249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285502245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b04b7180f7382a4ba81875704f1c689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manaBarA: {fileID: 0}
-  manaBarB: {fileID: 0}
-  player1Icon: {fileID: 0}
-  player2Icon: {fileID: 0}
 --- !u!1 &328989589
 GameObject:
   m_ObjectHideFlags: 0
@@ -6898,6 +6881,87 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &2050392435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2050392437}
+  - component: {fileID: 2050392436}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2050392436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050392435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc14225d01ca934da898279f1fe5ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Critical Hit
+    clip: {fileID: 8300000, guid: ee763290b2d0adf498e4a2ad87cd0f84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Normal Hit
+    clip: {fileID: 8300000, guid: dbbd4f0232e50df49a9899fee9f6a92a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 0aa4316afd3c3014693f8717888485f5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Crowd Cheering
+    clip: {fileID: 8300000, guid: 58bc5df95f5be834fa4dfd948ffb337e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword Clash
+    clip: {fileID: 8300000, guid: d4bea39f461cc45409a6b62560bba4f6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Whoosh
+    clip: {fileID: 8300000, guid: 83ab00614dce4b744bd29997c94c7556, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &2050392437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050392435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2063219159
 GameObject:
   m_ObjectHideFlags: 0
@@ -7186,10 +7250,13 @@ MonoBehaviour:
   mount2: {fileID: 0}
   rider1: {fileID: 0}
   rider2: {fileID: 0}
+  manaBarAScript: {fileID: 285502248}
+  manaBarBScript: {fileID: 1958257972}
   invincibilityLength: 1
   mountRenderer: {fileID: 0}
   riderRenderer: {fileID: 0}
   flashLength: 0.1
+  isInvincible: 0
 --- !u!1 &2120931867
 GameObject:
   m_ObjectHideFlags: 0

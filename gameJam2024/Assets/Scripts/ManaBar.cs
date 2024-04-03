@@ -42,5 +42,10 @@ public class ManaBar : MonoBehaviour
         }
         
     }
+
+    public void RefillMana()
+    {
+        manaBar.value = maxMana;
+    }
     
 }

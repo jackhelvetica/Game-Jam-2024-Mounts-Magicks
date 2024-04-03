@@ -10,8 +10,13 @@ public class GameManager : MonoBehaviour
     public GameObject rider1;
     public GameObject rider2;
 
+    //Respawn
     private Vector3 spawnPointA = new Vector3(-15, 3, 0);
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
+
+    //Others
+    public ManaBar manaBarAScript;
+    public ManaBar manaBarBScript;
 
     //Iframes
     public float invincibilityLength = 1f;
@@ -20,6 +25,7 @@ public class GameManager : MonoBehaviour
     public SkinnedMeshRenderer riderRenderer;
     private float flashCounter;
     public float flashLength = 0.1f;
+    public bool isInvincible = false;
 
     void Update()
     {
@@ -36,6 +42,7 @@ public class GameManager : MonoBehaviour
         //Iframes
         if (invincibilityCounter > 0)
         {
+            isInvincible = true;
             invincibilityCounter -= Time.deltaTime;
 
             flashCounter -= Time.deltaTime;
@@ -49,7 +56,17 @@ public class GameManager : MonoBehaviour
             if (invincibilityCounter <= 0)
             {
                 mountRenderer.enabled = true;
+                isInvincible = false;
             }
+        }
+
+        if (isInvincible)
+        {
+            KnockBack.activateKnockback = false;
+        }
+        else
+        {
+            KnockBack.activateKnockback = true;
         }
     }
 
@@ -58,19 +75,30 @@ public class GameManager : MonoBehaviour
     {
         if (mount.CompareTag("Mount1"))
         {
+            manaBarAScript.RefillMana();
+
+            //Spawnpoint
             mount.transform.position = spawnPointA;
             mount.transform.rotation = Quaternion.Euler(0, 90, 0);
+
+            //Iframe
             mountRenderer = mount1.GetComponentInChildren<SkinnedMeshRenderer>();
             riderRenderer = rider1.GetComponentInChildren<SkinnedMeshRenderer>();
         }
         else if (mount.CompareTag("Mount2"))
         {
+            manaBarBScript.RefillMana();
+
+            //Spawnpoint
             mount.transform.position = spawnPointB;
             mount.transform.rotation = Quaternion.Euler(0, 270, 0);
+
+            //Iframe
             mountRenderer = mount2.GetComponentInChildren<SkinnedMeshRenderer>();
             riderRenderer = rider2.GetComponentInChildren<SkinnedMeshRenderer>();
         }
 
+        //Iframes
         if (invincibilityCounter <= 0)
         {
             invincibilityCounter = invincibilityLength;
@@ -78,7 +106,5 @@ public class GameManager : MonoBehaviour
             riderRenderer.enabled = false;
             flashCounter = flashLength;
         }
-    }
-
-    //Iframes
+    }   
 }

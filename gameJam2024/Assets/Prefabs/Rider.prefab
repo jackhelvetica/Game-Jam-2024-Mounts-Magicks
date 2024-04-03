@@ -207,26 +207,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3174535097826016267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3176104265685681337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6d5ca1d45331243b3665a69f5c5e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: 400
-  manaBarScript: {fileID: 0}
-  riderAnimator: {fileID: 5492139402836573568}
-  attackZone: {fileID: 357765112665040117}
-  blueMat: {fileID: 2100000, guid: b6fbc2d063f4120418fdea674a7a7a0b, type: 2}
-  riderMesh: {fileID: 3944478530525772948}
-  weapon: {fileID: 8947684042017623664}
-  hand: {fileID: 4531377596729773274}
 --- !u!114 &2871507870986199150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,6 +297,30 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3174535097826016267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176104265685681337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6d5ca1d45331243b3665a69f5c5e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 400
+  manaBarScript: {fileID: 0}
+  riderAnimator: {fileID: 5492139402836573568}
+  attackZone: {fileID: 357765112665040117}
+  redMat: {fileID: 2100000, guid: 2bea4e2062acd684c9741eb42dfc1125, type: 2}
+  blueMat: {fileID: 2100000, guid: b6fbc2d063f4120418fdea674a7a7a0b, type: 2}
+  riderMesh: {fileID: 3944478530525772948}
+  blueGlowMat: {fileID: 2100000, guid: 8e1bb34c6d0e5c04fa1e9c01d2d7097c, type: 2}
+  redGlowMat: {fileID: 2100000, guid: 5c23a413174f8cc4eadc9d9fa0a29346, type: 2}
+  weapon: {fileID: 8947684042017623664}
+  hand: {fileID: 4531377596729773274}
+  sword: {fileID: 0}
 --- !u!1 &3944478530525772948 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7606798011910994564, guid: 5f55efe1190951a45bcb8a93863d357f, type: 3}
@@ -432,3 +436,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rider: {fileID: 3176104265685681337}
   blueMat: {fileID: 2100000, guid: 6f3995350fabb7e40b1d8087da64aa15, type: 2}
+  detectKnockbackMount: 0
+  detectKnockbackRider: 0

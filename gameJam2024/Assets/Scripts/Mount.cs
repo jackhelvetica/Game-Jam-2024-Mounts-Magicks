@@ -20,6 +20,7 @@ public class Mount : MonoBehaviour
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
 
     //Colour
+    public Material redMat;
     public Material blueMat;
     public GameObject mountMesh;
 
@@ -28,21 +29,34 @@ public class Mount : MonoBehaviour
     private int radius = 5;
     public TrailRenderer tr;
 
+    public float detectKnockbackCounter = 0f;
+    public Material blueGlowMat;
+    public Material redGlowMat;
+
     //Dash
-    private float dashTime = 0.2f;
-    private float dashSpeed = 30f;
+    private float dashTime = 0.05f;
+    private float dashSpeed = 200f;
 
     void Start()
     {
-        gameManagerScript = FindObjectOfType<GameManager>();
+        gameManagerScript = FindObjectOfType<GameManager>();       
 
         tr.emitting = false;
+
+        //Assign Healthbar to Mount
+        Mount[] mounts = FindObjectsOfType<Mount>(); //it finds 2 mounts, assign to [0] and [1]
+        int playerId = mounts.Length - 1; //playerid = 0
+        //print(transform.parent.parent.gameObject.name + " " + playerId);
+        Healthbar[] healthBars = FindObjectsOfType<Healthbar>(); //it finds 2 health bars, assign to [0] and [1]
+        Debug.Assert(healthBars.Length == 2);
+        healthbarScript = healthBars[playerId]; //assign mount to health bar
+        //print(healthBars[playerId].name);
 
         if (gameObject.CompareTag("Mount1"))
         {
             transform.position = spawnPointA;
             GameObject marker = transform.Find("Marker").gameObject;
-            marker.tag = "Marker1";
+            marker.tag = "Marker1";     
         }
         else if (gameObject.CompareTag("Mount2"))
         {
@@ -54,15 +68,6 @@ public class Mount : MonoBehaviour
             //Colour
             mountMesh.GetComponent<Renderer>().material = blueMat;
         }
-
-        //Assign Healthbar to Mount
-        Mount[] mounts = FindObjectsOfType<Mount>(); //it finds 2 mounts, assign to [0] and [1]
-        int playerId = mounts.Length - 1; //playerid = 0
-        //print(transform.parent.parent.gameObject.name + " " + playerId);
-        Healthbar[] healthBars = FindObjectsOfType<Healthbar>(); //it finds 2 health bars, assign to [0] and [1]
-        Debug.Assert(healthBars.Length == 2);
-        healthbarScript = healthBars[playerId]; //assign mount to health bar
-        //print(healthBars[playerId].name);
     }
     
     void Update()
@@ -83,6 +88,8 @@ public class Mount : MonoBehaviour
             tr.emitting = false;
             //mountAnimator.SetBool("Knockback", false);
         }
+
+        MountGlow();   
     }
 
     public void Move()
@@ -112,26 +119,24 @@ public class Mount : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Mount uses skill!");
             StartCoroutine(Dash());
         }       
     }
 
     IEnumerator Dash()
     {
+        FindObjectOfType<AudioManagerScript>().Play("Dash");
+        detectKnockbackCounter += Time.deltaTime;
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
         {
-            PlayerInput playerInput = GetComponent<PlayerInput>();
-            input = playerInput.actions["Move"].ReadValue<Vector2>();
-            //print(transform.parent.parent.gameObject.name + " input " + input);
-            Vector3 direction = new Vector3(input.x, 0, input.y);
-            direction.Normalize();
-
-            transform.Translate(direction * dashSpeed * Time.deltaTime, Space.World);
+            rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);            
 
             yield return null;
         }
+        yield return new WaitForSeconds(1f);
+        detectKnockbackCounter = 0;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -140,6 +145,7 @@ public class Mount : MonoBehaviour
         if (other.CompareTag("Death"))
         {
             Debug.Log("Player fell off");
+            FindObjectOfType<AudioManagerScript>().Play("Crowd Cheering");
             tr.emitting = false;
             healthbarScript.health--;
 
@@ -151,6 +157,32 @@ public class Mount : MonoBehaviour
             {
                 gameManagerScript.Respawn(gameObject);
             }           
+        }
+    }
+
+    public void MountGlow()
+    {
+        if (detectKnockbackCounter > 0)
+        {
+            if (gameObject.CompareTag("Mount1"))
+            {
+                mountMesh.GetComponent<Renderer>().material = redGlowMat;
+            }
+            else if (gameObject.CompareTag("Mount2"))
+            {
+                mountMesh.GetComponent<Renderer>().material = blueGlowMat;
+            }
+        }
+        else
+        {
+            if (gameObject.CompareTag("Mount1"))
+            {
+                mountMesh.GetComponent<Renderer>().material = redMat;
+            }
+            else if (gameObject.CompareTag("Mount2"))
+            {
+                mountMesh.GetComponent<Renderer>().material = blueMat;
+            }
         }
     }
 

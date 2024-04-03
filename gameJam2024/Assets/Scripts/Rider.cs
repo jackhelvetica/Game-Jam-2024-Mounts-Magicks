@@ -15,15 +15,22 @@ public class Rider : MonoBehaviour
     public GameObject attackZone;
 
     //Colour
+    public Material redMat;
     public Material blueMat;
     public GameObject riderMesh;
+    public Material blueGlowMat;
+    public Material redGlowMat;
 
     //Others
     public GameObject weapon;
     public GameObject hand;
+    public Sword sword;
+    public Mount mountScript;
 
     private void Start()
     {
+        sword = GetComponentInChildren<Sword>();
+
         //Assign Manabar to Rider
         Rider[] riders = FindObjectsOfType<Rider>();
         int playerId = riders.Length - 1;
@@ -38,6 +45,17 @@ public class Rider : MonoBehaviour
         Look();
         HoldWeapon();
         Attach();
+
+        RiderGlow();
+
+        if (mountScript != null)
+        {
+            if (mountScript.detectKnockbackCounter == 0)
+            {
+                sword.detectKnockback = false;
+            }
+        }
+        
     }
 
     public void Attach()
@@ -46,6 +64,10 @@ public class Rider : MonoBehaviour
         {
             GameObject marker1 = GameObject.FindWithTag("Marker1");
             transform.position = marker1.transform.position;
+
+            GameObject mount1 = GameObject.FindWithTag("Mount1");
+            mountScript = mount1.GetComponent<Mount>();
+
             //transform.parent.GetComponentInChildren<Mount>()
         }
         else if (gameObject.CompareTag("Rider2"))
@@ -59,6 +81,8 @@ public class Rider : MonoBehaviour
             else
             {
                 transform.position = marker2.transform.position;
+                GameObject mount2 = GameObject.FindWithTag("Mount2");
+                mountScript = mount2.GetComponent<Mount>();
             }
 
             //Colour
@@ -97,15 +121,57 @@ public class Rider : MonoBehaviour
 
     public void RiderSkill(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && mountScript.detectKnockbackCounter == 0)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Whoosh");
+            sword.detectKnockback = false;
+            
             manaBarScript.UseMana();
             if (ManaBar.useMana)
             {
                 riderAnimator.SetTrigger("Attack");
                 KnockBack.activateKnockback = true;
                 ManaBar.useMana = false;
-            }                     
+            }            
+        }
+        else if (context.performed && mountScript.detectKnockbackCounter > 0)
+        {
+            FindObjectOfType<AudioManagerScript>().Play("Whoosh");
+            sword.detectKnockback = true;
+            
+            manaBarScript.UseMana();
+            if (ManaBar.useMana)
+            {
+                riderAnimator.SetTrigger("Attack");
+                KnockBack.activateKnockback = true;
+                ManaBar.useMana = false;
+            }
+        }
+    }
+
+    public void RiderGlow()
+    {
+        if (sword.detectKnockback)
+        {
+            if (gameObject.CompareTag("Rider1"))
+            {
+                riderMesh.GetComponent<Renderer>().material = redGlowMat;
+            }
+            else if (gameObject.CompareTag("Rider2"))
+            {
+                riderMesh.GetComponent<Renderer>().material = blueGlowMat;
+            }
+        }
+        else
+        {
+            if (gameObject.CompareTag("Rider1"))
+            {
+                riderMesh.GetComponent<Renderer>().material = redMat;
+            }
+            else if (gameObject.CompareTag("Rider2"))
+            {
+                riderMesh.GetComponent<Renderer>().material = blueMat;
+            }
         }
     }
 }
