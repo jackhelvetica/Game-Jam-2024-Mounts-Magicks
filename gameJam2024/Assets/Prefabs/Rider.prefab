@@ -320,7 +320,8 @@ MonoBehaviour:
   redGlowMat: {fileID: 2100000, guid: 5c23a413174f8cc4eadc9d9fa0a29346, type: 2}
   weapon: {fileID: 8947684042017623664}
   hand: {fileID: 4531377596729773274}
-  sword: {fileID: 0}
+  sword: {fileID: 1065648783541279880}
+  mountScript: {fileID: 0}
 --- !u!1 &3944478530525772948 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7606798011910994564, guid: 5f55efe1190951a45bcb8a93863d357f, type: 3}
@@ -436,5 +437,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rider: {fileID: 3176104265685681337}
   blueMat: {fileID: 2100000, guid: 6f3995350fabb7e40b1d8087da64aa15, type: 2}
-  detectKnockbackMount: 0
-  detectKnockbackRider: 0
+  detectKnockback: 0
