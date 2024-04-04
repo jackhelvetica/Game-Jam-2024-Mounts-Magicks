@@ -137,7 +137,6 @@ public class Rider : MonoBehaviour
         else if (context.performed && mountScript.detectKnockbackCounter > 0)
         {
             FindObjectOfType<AudioManagerScript>().Play("Whoosh");
-            FindObjectOfType<AudioManagerScript>().Play("Activate");
             sword.detectKnockback = true;
             
             manaBarScript.UseMana();
@@ -153,7 +152,7 @@ public class Rider : MonoBehaviour
     public void RiderGlow()
     {
         if (sword.detectKnockback)
-        {            
+        {
             if (gameObject.CompareTag("Rider1"))
             {
                 riderMesh.GetComponent<Renderer>().material = redGlowMat;

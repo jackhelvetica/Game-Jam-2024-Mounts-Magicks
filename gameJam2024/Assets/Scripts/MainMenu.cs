@@ -13,9 +13,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Level");
-        //Load story scene instead
-        //In story scene, play images coroutine, then load level scene
+        SceneManager.LoadScene("CharacterSelect");
     }
     public void Quit()
     {
