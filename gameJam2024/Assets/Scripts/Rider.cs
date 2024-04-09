@@ -30,6 +30,7 @@ public class Rider : MonoBehaviour
     private void Start()
     {
         sword = GetComponentInChildren<Sword>();
+        weapon.transform.parent = hand.transform;
 
         //Assign Manabar to Rider
         Rider[] riders = FindObjectsOfType<Rider>();
@@ -43,19 +44,8 @@ public class Rider : MonoBehaviour
     void Update()
     {
         Look();
-        HoldWeapon();
         Attach();
-
-        RiderGlow();
-
-        if (mountScript != null)
-        {
-            if (mountScript.detectKnockbackCounter == 0)
-            {
-                sword.detectKnockback = false;
-            }
-        }
-        
+        RiderGlow();       
     }
 
     public void Attach()
@@ -90,11 +80,6 @@ public class Rider : MonoBehaviour
         }       
     }
 
-    public void HoldWeapon()
-    {        
-        weapon.transform.parent = hand.transform;
-    }
-
     public void Look()
     {
         PlayerInput playerInput = GetComponent<PlayerInput>();
@@ -121,10 +106,11 @@ public class Rider : MonoBehaviour
 
     public void RiderSkill(InputAction.CallbackContext context)
     {
-        if (context.performed && mountScript.detectKnockbackCounter == 0)
+        if (context.performed && mountScript.detectKnockbackCounter == 0) //no combo
         {
             FindObjectOfType<AudioManagerScript>().Play("Whoosh");
             sword.detectKnockback = false;
+            StartCoroutine(SetDefaultMat());
             
             manaBarScript.UseMana();
             if (ManaBar.useMana)
@@ -134,21 +120,22 @@ public class Rider : MonoBehaviour
                 ManaBar.useMana = false;
             }            
         }
-        else if (context.performed && mountScript.detectKnockbackCounter > 0)
+        else if (context.performed && mountScript.detectKnockbackCounter > 0) //combo
         {
             FindObjectOfType<AudioManagerScript>().Play("Whoosh");
             FindObjectOfType<AudioManagerScript>().Play("Activate");
             sword.detectKnockback = true;
-            
+            StartCoroutine(SetDefaultMat());
+
             manaBarScript.UseMana();
             if (ManaBar.useMana)
             {
                 riderAnimator.SetTrigger("Attack");
                 KnockBack.activateKnockback = true;
-                ManaBar.useMana = false;
+                ManaBar.useMana = false;                
             }
         }
-    }
+    }    
 
     public void RiderGlow()
     {
@@ -174,5 +161,11 @@ public class Rider : MonoBehaviour
                 riderMesh.GetComponent<Renderer>().material = blueMat;
             }
         }
+    }
+    IEnumerator SetDefaultMat()
+    {
+        Debug.Log("Unglowing...");
+        yield return new WaitForSeconds(0.8f);
+        sword.detectKnockback = false;
     }
 }

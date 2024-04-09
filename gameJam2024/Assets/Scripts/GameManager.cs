@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
     public SkinnedMeshRenderer riderRenderer;
     private float flashCounter;
     public float flashLength = 0.1f;
-    public bool isInvincible = false;
+    public GameObject currentlyDyingGO;
 
     //Round management
     public static int roundNumber = 1;
@@ -42,8 +44,22 @@ public class GameManager : MonoBehaviour
     public int player2WinCount = 0;
     public Button readyButton;
     public GameObject roundOverText;
+    public GameObject gameOverText;
     public CharacterHandler characterHandlerScript;
-
+    public static GameManager instance;
+    
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
     void Update()
     {
         if (CharacterHandler.setGameManager)
@@ -59,7 +75,7 @@ public class GameManager : MonoBehaviour
         //Iframes
         if (invincibilityCounter > 0)
         {
-            isInvincible = true;
+            currentlyDyingGO.GetComponent<Mount>().isInvincible = true;
             invincibilityCounter -= Time.deltaTime;
 
             flashCounter -= Time.deltaTime;
@@ -73,17 +89,8 @@ public class GameManager : MonoBehaviour
             if (invincibilityCounter <= 0)
             {
                 mountRenderer.enabled = true;
-                isInvincible = false;
+                currentlyDyingGO.GetComponent<Mount>().isInvincible = false;
             }
-        }
-
-        if (isInvincible)
-        {
-            KnockBack.activateKnockback = false;
-        }
-        else
-        {
-            KnockBack.activateKnockback = true;
         }
     }
 
@@ -93,6 +100,7 @@ public class GameManager : MonoBehaviour
         if (mount.CompareTag("Mount1"))
         {
             manaBarAScript.RefillMana();
+            currentlyDyingGO = mount;
 
             //Spawnpoint
             mount.transform.position = spawnPointA;
@@ -105,6 +113,7 @@ public class GameManager : MonoBehaviour
         else if (mount.CompareTag("Mount2"))
         {
             manaBarBScript.RefillMana();
+            currentlyDyingGO = mount;
 
             //Spawnpoint
             mount.transform.position = spawnPointB;
@@ -123,7 +132,15 @@ public class GameManager : MonoBehaviour
             riderRenderer.enabled = false;
             flashCounter = flashLength;
         }
-    }   
+    }
+    
+    public void BackToSpawn()
+    {
+        mount1.transform.position = spawnPointA;
+        mount1.transform.rotation = Quaternion.Euler(0, 90, 0);
+        mount2.transform.position = spawnPointB;
+        mount2.transform.rotation = Quaternion.Euler(0, 270, 0);
+    }
 
     public void NextRound()
     {
@@ -137,13 +154,13 @@ public class GameManager : MonoBehaviour
         //Add score marker        
         if (player1won)
         {
-            GameObject scoreMarkerGO = Instantiate(scoreMarker, p2ScoreMarkerPos[player1WinCount - 1], Quaternion.identity);
+            GameObject scoreMarkerGO = Instantiate(scoreMarker, p1ScoreMarkerPos[player1WinCount - 1], Quaternion.identity);
             scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
             player1won = false;
         }
         else if (player2won)
         {
-            GameObject scoreMarkerGO = Instantiate(scoreMarker, p1ScoreMarkerPos[player2WinCount - 1], Quaternion.identity);
+            GameObject scoreMarkerGO = Instantiate(scoreMarker, p2ScoreMarkerPos[player2WinCount - 1], Quaternion.identity);
             scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
             player2won = false;
         }
@@ -152,29 +169,41 @@ public class GameManager : MonoBehaviour
         roundNumber++;
     }
     IEnumerator RoundOverCountdown()
-    {
+    {       
         Vector3 punchScale = new Vector3(0.5f, 0.5f, 0.5f);
         float punchDuration = 1;
         int punchVibrato = 0;
         float punchElasticity = 0;
 
-        roundOverText.SetActive(true);
-        roundOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
-        yield return new WaitForSeconds(1.5f);
-        roundOverText.SetActive(false);
+        if (roundNumber < 3)
+        {
+            roundOverText.SetActive(true);
+            roundOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
+            yield return new WaitForSeconds(1.5f);
+            roundOverText.SetActive(false);
+        }
+        else if (roundNumber == 3)
+        {
+            gameOverText.SetActive(true);
+            gameOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
+            yield return new WaitForSeconds(1.5f);
+            gameOverText.SetActive(false);
+        }        
         scoreBoard.SetActive(true);
-    }
+        BackToSpawn();
 
-    public void EndGame()
-    {
-        //Happens when round = 4
-        //Go to win scene
-        //In win scene, instantiate prefab of winner and play animation on loop. Add "Player X wins!"
     }
 
     public void ReadyNextRound()
     {
-        scoreBoard.SetActive(false);
-        StartCoroutine(characterHandlerScript.Countdown(3));
+        if (roundNumber < 4)
+        {
+            scoreBoard.SetActive(false);
+            StartCoroutine(characterHandlerScript.Countdown(3));
+        }
+        else if (roundNumber == 4)
+        {
+            SceneManager.LoadScene("WinScreen");           
+        }
     }
 }

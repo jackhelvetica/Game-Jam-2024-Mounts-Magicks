@@ -183,7 +183,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.5764446, y: 2.8427565, z: 11.529127}
   m_Center: {x: 0.23129968, y: 0.49930257, z: -0.92973584}
---- !u!96 &6211443576143816676
+--- !u!96 &2377919860488658891
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -255,7 +255,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
+      key0: {r: 1, g: 0.42487997, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -330,7 +330,8 @@ MonoBehaviour:
   blueMat: {fileID: 2100000, guid: 5ba37f37ae07e0c4aa4299f4714e0b54, type: 2}
   mountMesh: {fileID: 4555075746460406840}
   knockbackScript: {fileID: 7488169015477921051}
-  tr: {fileID: 6211443576143816676}
+  tr: {fileID: 2377919860488658891}
+  detectKnockbackCounter: 0
   blueGlowMat: {fileID: 2100000, guid: 9edc9a59545fb324ba83b7f3a47d2a63, type: 2}
   redGlowMat: {fileID: 2100000, guid: 512c8fb8c09700f438348bb29d6ae523, type: 2}
 --- !u!114 &3559268843559466434

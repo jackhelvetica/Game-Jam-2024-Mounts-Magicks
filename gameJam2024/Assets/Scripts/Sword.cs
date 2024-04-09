@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
-    private GameObject mount;
+    public GameObject mount;
     public GameObject rider;
+    private bool assignMountRef = false;
 
     //Colour
     public Material blueMat;
@@ -13,25 +14,34 @@ public class Sword : MonoBehaviour
     //Knockback
     public bool detectKnockback = false;
 
-    //static doesn't work because you have 2 mounts and 2 riders!
-
     private void Start()
     {
-        //Assign Mount to Hammer
+        //Assign Mount to Sword
         if (rider.CompareTag("Rider1"))
         {
             mount = GameObject.FindGameObjectWithTag("Mount1");
         }
-        else if (rider.CompareTag("Rider2"))
+    }
+
+    private void Update()
+    {
+        //Assign Mount to Sword
+        if (rider.CompareTag("Rider2") && !assignMountRef && GameObject.FindGameObjectWithTag("Mount2") != null)
         {
             mount = GameObject.FindGameObjectWithTag("Mount2");
 
             //Colour
             GetComponent<Renderer>().material = blueMat;
+            assignMountRef = true;
+        }
+        else
+        {
+            return;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (KnockBack.activateKnockback)
         {
             Rigidbody opponentRb = other.GetComponent<Rigidbody>();
@@ -45,21 +55,25 @@ public class Sword : MonoBehaviour
                 //Debug.Log("Opponent's position is " + other.transform.position);
                 Debug.Log("Detect knockback mount is " + detectKnockback);
 
-                if (distance <= 9f && detectKnockback)
+                if (distance <= 9f && detectKnockback && !other.GetComponent<Mount>().isInvincible)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetCriticalKnockbacked(knockbackDirection);
                     FindObjectOfType<AudioManagerScript>().Play("Critical Hit");
                 }
-                else if (distance > 0f)
+                else if (distance > 0f && !other.GetComponent<Mount>().isInvincible)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetNormalKnockbacked(knockbackDirection);
                     FindObjectOfType<AudioManagerScript>().Play("Normal Hit");
-                }           
+                }
+            }
+            else
+            {
+                return;
             }
 
             KnockBack.activateKnockback = false;
         }
-    }
+    }   
 }

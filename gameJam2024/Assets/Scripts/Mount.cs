@@ -19,6 +19,8 @@ public class Mount : MonoBehaviour
     private Vector3 spawnPointA = new Vector3(-15, 3, 0);
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
 
+    public bool isInvincible = false;
+
     //Colour
     public Material redMat;
     public Material blueMat;
@@ -33,15 +35,17 @@ public class Mount : MonoBehaviour
     public Material blueGlowMat;
     public Material redGlowMat;
 
+    private bool falling = false;
+
     //Dash
     private float dashTime = 0.05f;
-    private float dashSpeed = 200f;
+    private float dashSpeed = 500f;
+    private float dashCooldown = 1.3f;
+    private bool startDashCooldown = false;
 
     void Start()
     {
-        gameManagerScript = FindObjectOfType<GameManager>();       
-
-        tr.emitting = false;
+        gameManagerScript = FindObjectOfType<GameManager>();
 
         //Assign Healthbar to Mount
         Mount[] mounts = FindObjectsOfType<Mount>(); //it finds 2 mounts, assign to [0] and [1]
@@ -52,6 +56,7 @@ public class Mount : MonoBehaviour
         healthbarScript = healthBars[playerId]; //assign mount to health bar
         //print(healthBars[playerId].name);
 
+        //Set marker and material colour
         if (gameObject.CompareTag("Mount1"))
         {
             transform.position = spawnPointA;
@@ -80,17 +85,31 @@ public class Mount : MonoBehaviour
         }
         else //Being knockbacked
         {
-            mountAnimator.SetBool("Move", false);
-            //mountAnimator.SetBool("Knockback", true);
+            mountAnimator.SetBool("Move", false);            
         }
-        if (IsGrounded())
+
+        if (IsGrounded()) //On ground
         {
-            tr.emitting = false;
-            //mountAnimator.SetBool("Knockback", false);
+            falling = false;
+        }
+        else //In air
+        {
+            falling = true;
         }
 
-        MountGlow();
+        //Dash cooldown
+        if (startDashCooldown)
+        {
+            dashCooldown -= Time.deltaTime;
+            if (dashCooldown < 0)
+            {
+                startDashCooldown = false;
+                dashCooldown = 2f;
+            }
+        }
 
+        Fall();
+        MountGlow();
         EnableNextRound();
     }
 
@@ -119,7 +138,7 @@ public class Mount : MonoBehaviour
 
     public void MountSkill(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !startDashCooldown)
         {
             StartCoroutine(Dash());
         }       
@@ -128,20 +147,21 @@ public class Mount : MonoBehaviour
     IEnumerator Dash()
     {
         FindObjectOfType<AudioManagerScript>().Play("Dash");
+        startDashCooldown = true;       
+
         detectKnockbackCounter += Time.deltaTime;
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
-        {
-            tr.emitting = true;
+        {           
+            rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);
 
-            rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);            
+            tr.emitting = true;
 
             yield return null;
         }
         
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.7f);       
         tr.emitting = false;
-        yield return new WaitForSeconds(0.8f);
         detectKnockbackCounter = 0;       
     }
 
@@ -209,20 +229,54 @@ public class Mount : MonoBehaviour
         Debug.Log("Normal hit!");
     }
 
-    public void EnableNextRound()
+    public void Fall()
     {
-        if (healthbarScript.health == 0)
+        GameObject rider1 = GameObject.FindGameObjectWithTag("Rider1");
+        GameObject rider2 = GameObject.FindGameObjectWithTag("Rider2");
+
+        if (rider1 == null || rider2 == null)
         {
-            //Next round
+            return;
+        }
+
+        if (falling)
+        {
             if (gameObject.CompareTag("Mount1"))
             {
-                GameManager.player1won = true;
-                gameManagerScript.player1WinCount++;                
+                rider1.GetComponent<Animator>().SetBool("Fall", true);                
             }
             else if (gameObject.CompareTag("Mount2"))
             {
+                rider2.GetComponent<Animator>().SetBool("Fall", true);
+            }        
+        }
+        else
+        {            
+            if (gameObject.CompareTag("Mount1"))
+            {
+                rider1.GetComponent<Animator>().SetBool("Fall", false);
+            }
+            else if (gameObject.CompareTag("Mount2"))
+            {
+                rider2.GetComponent<Animator>().SetBool("Fall", false);
+            }
+        }        
+    }
+
+    public void EnableNextRound()
+    {
+        if (healthbarScript.health == 0) //if someone dies
+        {
+            //Next round
+            if (gameObject.CompareTag("Mount1")) //mount1 died
+            {
                 GameManager.player2won = true;
-                gameManagerScript.player2WinCount++;
+                gameManagerScript.player2WinCount++;                
+            }
+            else if (gameObject.CompareTag("Mount2"))
+            {
+                GameManager.player1won = true;
+                gameManagerScript.player1WinCount++;
             }
             gameManagerScript.NextRound();
             healthbarScript.health += 3;
@@ -236,6 +290,6 @@ public class Mount : MonoBehaviour
 
     public bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, -Vector3.up, 0.1f);
+        return Physics.Raycast(transform.position, Vector3.down, 0.95f);
     }
 }

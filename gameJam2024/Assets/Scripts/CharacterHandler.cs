@@ -48,6 +48,15 @@ public class CharacterHandler : MonoBehaviour
             readyButton.interactable = true;
             readyButton.Select();
         }
+        if (index > 4)
+        {
+            index = 4;
+        }
+
+        if (playerInputManager.playerCount == 4)
+        {
+            playerInputManager.DisableJoining();
+        }
     }
 
     public void AddPlayer(PlayerInput player)

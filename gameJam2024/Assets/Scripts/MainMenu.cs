@@ -17,9 +17,20 @@ public class MainMenu : MonoBehaviour
         //Load story scene instead
         //In story scene, play images coroutine, then load level scene
     }
+
+    public void Return()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Story()
+    {
+        SceneManager.LoadScene("Story");
+    }
+
     public void Quit()
     {
         Debug.Log("Quit game");
-        //Application.Quit();
+        Application.Quit();
     }
 }
