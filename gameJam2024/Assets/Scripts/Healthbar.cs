@@ -46,12 +46,4 @@ public class Healthbar : MonoBehaviour
             }
         }
     }
-
-    public void EnableNextRound()
-    {
-        if (health == 0)
-        {
-            //Next round
-        }
-    }
 }

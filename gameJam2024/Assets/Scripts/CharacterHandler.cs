@@ -117,6 +117,7 @@ public class CharacterHandler : MonoBehaviour
 
     public IEnumerator Countdown(int seconds)
     {
+        Debug.Log("Starting countdown");
         //Tween variables
         Vector3 punchScale = new Vector3(0.5f, 0.5f, 0.5f);
         float punchDuration = 1;
@@ -138,13 +139,14 @@ public class CharacterHandler : MonoBehaviour
             }
             else if (count == 0) //GO!
             {
-                Debug.Log("Make GO! disppear");
+                Debug.Log("GO!");
                 countdownObjectImage = countdownObjects[count].GetComponent<Image>();
                 DG.Tweening.Sequence goObjectSequence = DOTween.Sequence();
                     goObjectSequence.Append(countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity));
                     goObjectSequence.Append(countdownObjectImage.DOFade(0, 1f));
                 yield return new WaitForSeconds(2);
                 countdownObjects[count].SetActive(false);
+                countdownObjects[count].GetComponent<Image>().DOFade(1, 0f); //Set alpha of GO! back to 1
                 count--;
             }          
         }

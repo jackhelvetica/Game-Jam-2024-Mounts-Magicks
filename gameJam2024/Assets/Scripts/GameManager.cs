@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +32,17 @@ public class GameManager : MonoBehaviour
 
     //Round management
     public static int roundNumber = 1;
+    public GameObject scoreBoard;
+    public GameObject scoreMarker;
+    public static bool player1won;
+    public static bool player2won;
+    public List<Vector3> p1ScoreMarkerPos = new List<Vector3>();
+    public List<Vector3> p2ScoreMarkerPos = new List<Vector3>();
+    public int player1WinCount = 0;
+    public int player2WinCount = 0;
+    public Button readyButton;
+    public GameObject roundOverText;
+    public CharacterHandler characterHandlerScript;
 
     void Update()
     {
@@ -113,17 +127,54 @@ public class GameManager : MonoBehaviour
 
     public void NextRound()
     {
+        mount1.GetComponent<PlayerInput>().DeactivateInput();
+        mount2.GetComponent<PlayerInput>().DeactivateInput();
+        rider1.GetComponent<PlayerInput>().DeactivateInput();
+        rider2.GetComponent<PlayerInput>().DeactivateInput();
+
+        StartCoroutine(RoundOverCountdown());
+
+        //Add score marker        
+        if (player1won)
+        {
+            GameObject scoreMarkerGO = Instantiate(scoreMarker, p2ScoreMarkerPos[player1WinCount - 1], Quaternion.identity);
+            scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
+            player1won = false;
+        }
+        else if (player2won)
+        {
+            GameObject scoreMarkerGO = Instantiate(scoreMarker, p1ScoreMarkerPos[player2WinCount - 1], Quaternion.identity);
+            scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
+            player2won = false;
+        }
+
+        readyButton.Select();
         roundNumber++;
-        //"Round over!" text appear
-        //Make scoreboard appear
-        //Add a mark on the winner
-        //Select "next round" button
-        //Close scoreboard
     }
+    IEnumerator RoundOverCountdown()
+    {
+        Vector3 punchScale = new Vector3(0.5f, 0.5f, 0.5f);
+        float punchDuration = 1;
+        int punchVibrato = 0;
+        float punchElasticity = 0;
+
+        roundOverText.SetActive(true);
+        roundOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
+        yield return new WaitForSeconds(1.5f);
+        roundOverText.SetActive(false);
+        scoreBoard.SetActive(true);
+    }
+
     public void EndGame()
     {
         //Happens when round = 4
         //Go to win scene
         //In win scene, instantiate prefab of winner and play animation on loop. Add "Player X wins!"
+    }
+
+    public void ReadyNextRound()
+    {
+        scoreBoard.SetActive(false);
+        StartCoroutine(characterHandlerScript.Countdown(3));
     }
 }

@@ -89,7 +89,9 @@ public class Mount : MonoBehaviour
             //mountAnimator.SetBool("Knockback", false);
         }
 
-        MountGlow();   
+        MountGlow();
+
+        EnableNextRound();
     }
 
     public void Move()
@@ -205,7 +207,26 @@ public class Mount : MonoBehaviour
 
         knockbackScript.CallNormalKnockback(knockbackDirection, upForce, input);
         Debug.Log("Normal hit!");
+    }
 
+    public void EnableNextRound()
+    {
+        if (healthbarScript.health == 0)
+        {
+            //Next round
+            if (gameObject.CompareTag("Mount1"))
+            {
+                GameManager.player1won = true;
+                gameManagerScript.player1WinCount++;                
+            }
+            else if (gameObject.CompareTag("Mount2"))
+            {
+                GameManager.player2won = true;
+                gameManagerScript.player2WinCount++;
+            }
+            gameManagerScript.NextRound();
+            healthbarScript.health += 3;
+        }        
     }
 
     private void OnDrawGizmos()
