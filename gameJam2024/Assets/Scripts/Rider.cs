@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 public class Rider : MonoBehaviour
 {
@@ -116,6 +117,7 @@ public class Rider : MonoBehaviour
             if (ManaBar.useMana)
             {
                 riderAnimator.SetTrigger("Attack");
+                GetComponent<VisualEffect>().Play();
                 KnockBack.activateKnockback = true;
                 ManaBar.useMana = false;
             }            
@@ -131,6 +133,7 @@ public class Rider : MonoBehaviour
             if (ManaBar.useMana)
             {
                 riderAnimator.SetTrigger("Attack");
+                GetComponent<VisualEffect>().Play();
                 KnockBack.activateKnockback = true;
                 ManaBar.useMana = false;                
             }

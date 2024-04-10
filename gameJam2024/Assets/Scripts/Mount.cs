@@ -39,9 +39,10 @@ public class Mount : MonoBehaviour
 
     //Dash
     private float dashTime = 0.05f;
-    private float dashSpeed = 500f;
+    private float dashSpeed = 35f;
     private float dashCooldown = 1.3f;
     private bool startDashCooldown = false;
+    private bool isDashing = false;
 
     void Start()
     {
@@ -113,6 +114,11 @@ public class Mount : MonoBehaviour
         EnableNextRound();
     }
 
+    void FixedUpdate()
+    {
+        
+    }
+
     public void Move()
     {        
         PlayerInput playerInput = GetComponent<PlayerInput>();
@@ -146,14 +152,17 @@ public class Mount : MonoBehaviour
 
     IEnumerator Dash()
     {
+        isDashing = true;
+
         FindObjectOfType<AudioManagerScript>().Play("Dash");
         startDashCooldown = true;       
 
         detectKnockbackCounter += Time.deltaTime;
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
-        {           
-            rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);
+        {
+            rb.velocity = transform.forward * dashSpeed;
+            //rb.AddForce(transform.forward * dashSpeed, ForceMode.Force);
 
             tr.emitting = true;
 

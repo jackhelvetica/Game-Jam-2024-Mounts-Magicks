@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Sword : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class Sword : MonoBehaviour
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetCriticalKnockbacked(knockbackDirection);
+                    other.GetComponent<VisualEffect>().Play();
                     FindObjectOfType<AudioManagerScript>().Play("Critical Hit");
                 }
                 else if (distance > 0f && !other.GetComponent<Mount>().isInvincible)
