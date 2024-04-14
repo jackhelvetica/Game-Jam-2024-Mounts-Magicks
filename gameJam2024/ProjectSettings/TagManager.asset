@@ -16,6 +16,7 @@ TagManager:
   - Rider2
   - Mount
   - Rider
+  - Sphere
   layers:
   - Default
   - TransparentFX

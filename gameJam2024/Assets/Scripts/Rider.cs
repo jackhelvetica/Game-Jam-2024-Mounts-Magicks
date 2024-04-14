@@ -46,7 +46,7 @@ public class Rider : MonoBehaviour
     {
         Look();
         Attach();
-        RiderGlow();       
+        //RiderGlow();       
     }
 
     public void Attach()
@@ -107,11 +107,11 @@ public class Rider : MonoBehaviour
 
     public void RiderSkill(InputAction.CallbackContext context)
     {
-        if (context.performed && mountScript.detectKnockbackCounter == 0) //no combo
+        if (context.performed) //&& mountScript.detectKnockbackCounter == 0) //no combo
         {
             FindObjectOfType<AudioManagerScript>().Play("Whoosh");
-            sword.detectKnockback = false;
-            StartCoroutine(SetDefaultMat());
+            //sword.detectKnockback = false;
+            //StartCoroutine(SetDefaultMat());
             
             manaBarScript.UseMana();
             if (ManaBar.useMana)
@@ -122,22 +122,22 @@ public class Rider : MonoBehaviour
                 ManaBar.useMana = false;
             }            
         }
-        else if (context.performed && mountScript.detectKnockbackCounter > 0) //combo
-        {
-            FindObjectOfType<AudioManagerScript>().Play("Whoosh");
-            FindObjectOfType<AudioManagerScript>().Play("Activate");
-            sword.detectKnockback = true;
-            StartCoroutine(SetDefaultMat());
+        //else if (context.performed && mountScript.detectKnockbackCounter > 0) //combo
+        //{
+        //    FindObjectOfType<AudioManagerScript>().Play("Whoosh");
+        //    FindObjectOfType<AudioManagerScript>().Play("Activate");
+        //    sword.detectKnockback = true;
+        //    StartCoroutine(SetDefaultMat());
 
-            manaBarScript.UseMana();
-            if (ManaBar.useMana)
-            {
-                riderAnimator.SetTrigger("Attack");
-                GetComponent<VisualEffect>().Play();
-                KnockBack.activateKnockback = true;
-                ManaBar.useMana = false;                
-            }
-        }
+        //    manaBarScript.UseMana();
+        //    if (ManaBar.useMana)
+        //    {
+        //        riderAnimator.SetTrigger("Attack");
+        //        GetComponent<VisualEffect>().Play();
+        //        KnockBack.activateKnockback = true;
+        //        ManaBar.useMana = false;                
+        //    }
+        //}
     }    
 
     public void RiderGlow()

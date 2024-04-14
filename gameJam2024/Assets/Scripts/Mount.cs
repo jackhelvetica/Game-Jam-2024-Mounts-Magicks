@@ -18,17 +18,24 @@ public class Mount : MonoBehaviour
     private GameManager gameManagerScript;
     private Vector3 spawnPointA = new Vector3(-15, 3, 0);
     private Vector3 spawnPointB = new Vector3(15, 3, 0);
-
+   
     public bool isInvincible = false;
+    public bool enableCritIcon = false;
 
     //Colour
     public Material redMat;
     public Material blueMat;
     public GameObject mountMesh;
 
+    //Circle
+    public GameObject blueCircle;
+    public GameObject redCircle;
+    private Color brightColour = new Color(255,255,255,255);
+    private Color dullColour = new Color(100,100,100,255);
+
     //Knockback
     public KnockBack knockbackScript;
-    private int radius = 5;
+    private int radius = 6;
     public TrailRenderer tr;
 
     public float detectKnockbackCounter = 0f;
@@ -62,7 +69,11 @@ public class Mount : MonoBehaviour
         {
             transform.position = spawnPointA;
             GameObject marker = transform.Find("Marker").gameObject;
-            marker.tag = "Marker1";     
+            marker.tag = "Marker1";
+
+            //Colour
+            redCircle.SetActive(true);
+            redCircle.GetComponent<SpriteRenderer>().color = dullColour;
         }
         else if (gameObject.CompareTag("Mount2"))
         {
@@ -73,6 +84,8 @@ public class Mount : MonoBehaviour
 
             //Colour
             mountMesh.GetComponent<Renderer>().material = blueMat;
+            blueCircle.SetActive(true);
+            blueCircle.GetComponent<SpriteRenderer>().color = dullColour;
         }
     }
     
@@ -109,9 +122,9 @@ public class Mount : MonoBehaviour
             }
         }
 
-        Fall();
-        MountGlow();
+        Fall();       
         EnableNextRound();
+        //MountGlow();
     }
 
     public void Move()
@@ -154,7 +167,7 @@ public class Mount : MonoBehaviour
         FindObjectOfType<AudioManagerScript>().Play("Dash");
         startDashCooldown = true;       
 
-        detectKnockbackCounter += Time.deltaTime;
+        //detectKnockbackCounter += Time.deltaTime;
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
         {
@@ -168,7 +181,7 @@ public class Mount : MonoBehaviour
         
         yield return new WaitForSeconds(0.7f);       
         tr.emitting = false;
-        detectKnockbackCounter = 0;       
+        //detectKnockbackCounter = 0;       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -188,6 +201,22 @@ public class Mount : MonoBehaviour
             {
                 gameManagerScript.Respawn(gameObject);
             }           
+        }
+
+        if (other.CompareTag("Sphere"))
+        {
+            enableCritIcon = true;
+            redCircle.GetComponent<SpriteRenderer>().color = brightColour;
+            blueCircle.GetComponent<SpriteRenderer>().color = brightColour;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Sphere"))
+        {
+            enableCritIcon = false;
+            redCircle.GetComponent<SpriteRenderer>().color = dullColour;
+            blueCircle.GetComponent<SpriteRenderer>().color = dullColour;
         }
     }
 

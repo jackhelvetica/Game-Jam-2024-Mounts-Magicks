@@ -42,31 +42,34 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
         if (KnockBack.activateKnockback)
         {
             Rigidbody opponentRb = other.GetComponent<Rigidbody>();
             Mount opponentMount = other.GetComponent<Mount>();
 
-            if (opponentRb != null && other.tag != mount.tag) //prevent hitting yourself
+            if (opponentRb != null && other.tag != mount.tag && other.tag != "Sphere") //prevent hitting yourself
             {
                 float distance = Vector3.Distance(mount.transform.position, other.transform.position);
                 //Debug.Log("Distance is " + distance);
                 //Debug.Log("My position is " + mount.transform.position);
                 //Debug.Log("Opponent's position is " + other.transform.position);
-                Debug.Log("Detect knockback mount is " + detectKnockback);
+                //Debug.Log("Detect knockback mount is " + detectKnockback);
+                //if (distance <= 6f && detectKnockback && !other.GetComponent<Mount>().isInvincible)
 
-                if (distance <= 9f && detectKnockback && !other.GetComponent<Mount>().isInvincible)
+                if (distance <= 6f && !other.GetComponent<Mount>().isInvincible)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
-                    opponentMount.GetCriticalKnockbacked(knockbackDirection);
+                    opponentMount.GetCriticalKnockbacked(knockbackDirection);                    
+
                     other.GetComponent<VisualEffect>().Play();
                     FindObjectOfType<AudioManagerScript>().Play("Critical Hit");
                 }
-                else if (distance > 0f && !other.GetComponent<Mount>().isInvincible)
+                else if (distance > 6f && !other.GetComponent<Mount>().isInvincible)
                 {
                     Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
                     opponentMount.GetNormalKnockbacked(knockbackDirection);
+
+                    //vfx
                     FindObjectOfType<AudioManagerScript>().Play("Normal Hit");
                 }
             }
