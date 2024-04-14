@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 82
     y: -190
-    width: 1284
-    height: 1449
+    width: 1285
+    height: 1436
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -950,7 +950,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.3
+      m_SerializableObject: 0.8
     m_Space: 2147483647
   m_Property:
     name: Lifetime

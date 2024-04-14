@@ -167,7 +167,6 @@ public class Rider : MonoBehaviour
     }
     IEnumerator SetDefaultMat()
     {
-        Debug.Log("Unglowing...");
         yield return new WaitForSeconds(0.8f);
         sword.detectKnockback = false;
     }

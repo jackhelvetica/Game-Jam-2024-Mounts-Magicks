@@ -24,34 +24,13 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614555}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661614600}
-      id: 0
-      isStickyNote: 0
     - model: {fileID: 8926484042661614558}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 0}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614583}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614585}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614589}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614603}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614591}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614605}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661614593}
       id: 0
       isStickyNote: 0
     - model: {fileID: 8926484042661614610}
@@ -143,9 +122,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -1099
-    y: -716
-    width: 3734
-    height: 2050
+    y: -715
+    width: 3735
+    height: 2043
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1249,7 +1228,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 4
+      m_SerializableObject: 10
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -2579,7 +2558,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 6
+      m_SerializableObject: 11
     m_Space: 2147483647
   m_Property:
     name: Size
@@ -4970,7 +4949,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.TArcSphere, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":1.0},"arc":6.2831854820251469}'
+      m_SerializableObject: '{"sphere":{"transform":{"position":{"x":0.0,"y":0.0,"z":0.0},"angles":{"x":0.0,"y":0.0,"z":0.0},"scale":{"x":1.0,"y":1.0,"z":1.0}},"radius":6.0},"arc":6.2831854820251469}'
     m_Space: 0
   m_Property:
     name: arcSphere
@@ -5912,7 +5891,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.1
+      m_SerializableObject: 2
     m_Space: 2147483647
   m_Property:
     name: A
@@ -5946,7 +5925,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 4
+      m_SerializableObject: 10
     m_Space: 2147483647
   m_Property:
     name: B
@@ -7381,7 +7360,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 6
+      m_SerializableObject: 10
     m_Space: 2147483647
   m_Property:
     name: Size

@@ -39,7 +39,7 @@ public class Mount : MonoBehaviour
 
     //Dash
     private float dashTime = 0.05f;
-    private float dashSpeed = 35f;
+    private float dashSpeed = 30f;
     private float dashCooldown = 1.3f;
     private bool startDashCooldown = false;
     private bool isDashing = false;
@@ -114,11 +114,6 @@ public class Mount : MonoBehaviour
         EnableNextRound();
     }
 
-    void FixedUpdate()
-    {
-        
-    }
-
     public void Move()
     {        
         PlayerInput playerInput = GetComponent<PlayerInput>();
@@ -152,7 +147,9 @@ public class Mount : MonoBehaviour
 
     IEnumerator Dash()
     {
-        isDashing = true;
+        PlayerInput playerInput = GetComponent<PlayerInput>();
+        input = playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector3 direction = new Vector3(input.x, 0, input.y);
 
         FindObjectOfType<AudioManagerScript>().Play("Dash");
         startDashCooldown = true;       
