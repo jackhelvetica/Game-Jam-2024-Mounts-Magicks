@@ -45,11 +45,11 @@ public class Mount : MonoBehaviour
     private bool falling = false;
 
     //Dash
+    public DashBar dashBarScript;
     private float dashTime = 0.05f;
     private float dashSpeed = 30f;
     private float dashCooldown = 1.3f;
     private bool startDashCooldown = false;
-    private bool isDashing = false;
 
     void Start()
     {
@@ -63,6 +63,11 @@ public class Mount : MonoBehaviour
         Debug.Assert(healthBars.Length == 2);
         healthbarScript = healthBars[playerId]; //assign mount to health bar
         //print(healthBars[playerId].name);
+
+        //Assign Dashbar to Mount
+        DashBar[] dashBars = FindObjectsOfType<DashBar>();
+        Debug.Assert(dashBars.Length == 2);
+        dashBarScript = dashBars[playerId];
 
         //Set marker and material colour
         if (gameObject.CompareTag("Mount1"))
@@ -165,7 +170,9 @@ public class Mount : MonoBehaviour
         Vector3 direction = new Vector3(input.x, 0, input.y);
 
         FindObjectOfType<AudioManagerScript>().Play("Dash");
-        startDashCooldown = true;       
+        startDashCooldown = true;
+
+        dashBarScript.UseDash();
 
         //detectKnockbackCounter += Time.deltaTime;
         float startTime = Time.time;
