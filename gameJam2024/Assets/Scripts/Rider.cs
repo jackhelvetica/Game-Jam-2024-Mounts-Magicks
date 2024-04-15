@@ -27,6 +27,8 @@ public class Rider : MonoBehaviour
     public GameObject hand;
     public Sword sword;
     public Mount mountScript;
+    public GameObject redSwordTrail;
+    public GameObject blueSwordTrail;
 
     private void Start()
     {
@@ -78,7 +80,7 @@ public class Rider : MonoBehaviour
 
             //Colour
             riderMesh.GetComponent<Renderer>().material = blueMat;
-        }       
+        }
     }
 
     public void Look()
@@ -109,18 +111,19 @@ public class Rider : MonoBehaviour
     {
         if (context.performed) //&& mountScript.detectKnockbackCounter == 0) //no combo
         {
-            FindObjectOfType<AudioManagerScript>().Play("Whoosh");
+            
             //sword.detectKnockback = false;
             //StartCoroutine(SetDefaultMat());
-            
+
             manaBarScript.UseMana();
             if (ManaBar.useMana)
             {
+                FindObjectOfType<AudioManagerScript>().Play("Whoosh");
                 riderAnimator.SetTrigger("Attack");
-                GetComponent<VisualEffect>().Play();
+                StartCoroutine(SwordTrail());
                 KnockBack.activateKnockback = true;
                 ManaBar.useMana = false;
-            }            
+            }
         }
         //else if (context.performed && mountScript.detectKnockbackCounter > 0) //combo
         //{
@@ -138,7 +141,23 @@ public class Rider : MonoBehaviour
         //        ManaBar.useMana = false;                
         //    }
         //}
-    }    
+    }
+
+    IEnumerator SwordTrail()
+    {
+        if (gameObject.CompareTag("Rider1"))
+        {
+            redSwordTrail.SetActive(true);
+            yield return new WaitForSeconds(1);
+            redSwordTrail.SetActive(false);
+        }
+        else if (gameObject.CompareTag("Rider2"))
+        {
+            blueSwordTrail.SetActive(true);
+            yield return new WaitForSeconds(1);
+            blueSwordTrail.SetActive(false);
+        }
+    }
 
     public void RiderGlow()
     {

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class CharacterHandler : MonoBehaviour
 {
@@ -22,9 +23,11 @@ public class CharacterHandler : MonoBehaviour
     public List<PlayerInput> playerInputList = new List<PlayerInput>();
     public GameObject characterSelectScreen;
     public Button readyButton;
+    public Button resetButton;
     private bool isReady = false;
     public static bool setUI = false;
     public static bool setGameManager = false;
+    public GameManager gameManagerScript;
 
     //Countdown
     public List<GameObject> countdownObjects = new List<GameObject>();
@@ -34,6 +37,7 @@ public class CharacterHandler : MonoBehaviour
     {
         characterSelectScreen.SetActive(true);
         readyButton.interactable = false;
+        resetButton.Select();
 
         //Spawn characters
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -44,9 +48,15 @@ public class CharacterHandler : MonoBehaviour
     {
         if (index == 4 && !isReady)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Player Ready");
             isReady = true;
             readyButton.interactable = true;
             readyButton.Select();
+        }
+        else
+        {
+            readyButton.interactable = false;
+            resetButton.Select();
         }
         if (index > 4)
         {
@@ -64,6 +74,8 @@ public class CharacterHandler : MonoBehaviour
         Debug.Log("Add player");
         if (index == 0)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Player Join");
+
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Mount1";
@@ -77,6 +89,8 @@ public class CharacterHandler : MonoBehaviour
         }
         else if (index == 1)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Player Join");
+
             player.transform.position = spawnPointA;
             player.transform.rotation = Quaternion.Euler(0, 90, 0);
             player.tag = "Rider1";
@@ -89,7 +103,9 @@ public class CharacterHandler : MonoBehaviour
             playerInputManager.playerPrefab = playersList[index];
         }
         else if (index == 2)
-        {            
+        {
+            FindObjectOfType<AudioManagerScript>().Play("Player Join");
+
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Rider2";
@@ -103,6 +119,8 @@ public class CharacterHandler : MonoBehaviour
         }
         else if (index == 3)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Player Join");
+
             player.transform.position = spawnPointB;
             player.transform.rotation = Quaternion.Euler(0, 270, 0);
             player.tag = "Mount2";
@@ -118,6 +136,7 @@ public class CharacterHandler : MonoBehaviour
     public void Ready()
     {
         Debug.Log("READY");
+        FindObjectOfType<AudioManagerScript>().Play("Button2");
         characterSelectScreen.SetActive(false);
         setUI = true;
         setGameManager = true;
@@ -141,6 +160,7 @@ public class CharacterHandler : MonoBehaviour
             countdownObjects[count].SetActive(true);
             if (count > 0) //3...2...1...
             {
+                FindObjectOfType<AudioManagerScript>().Play("Countdown Numbers");
                 countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
                 yield return new WaitForSeconds(1);
                 countdownObjects[count].SetActive(false);
@@ -149,6 +169,7 @@ public class CharacterHandler : MonoBehaviour
             else if (count == 0) //GO!
             {
                 Debug.Log("GO!");
+                FindObjectOfType<AudioManagerScript>().Play("Countdown Go");
                 countdownObjectImage = countdownObjects[count].GetComponent<Image>();
                 DG.Tweening.Sequence goObjectSequence = DOTween.Sequence();
                     goObjectSequence.Append(countdownObjects[count].transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity));
@@ -175,10 +196,28 @@ public class CharacterHandler : MonoBehaviour
         foreach (var playerImage in playersImageList)
         {
             playerImage.SetActive(false);
+
         }
         foreach (var playerInput in playerInputList)
         {
             Destroy(playerInput);
+        }
+
+        if (GameObject.FindWithTag("Mount1") != null)
+        {
+            Destroy(GameObject.FindWithTag("Mount1"));
+        }
+        if (GameObject.FindWithTag("Mount2") != null)
+        {
+            Destroy(GameObject.FindWithTag("Mount2"));
+        }
+        if (GameObject.FindWithTag("Rider1") != null)
+        {
+            Destroy(GameObject.FindWithTag("Rider1"));
+        }
+        if (GameObject.FindWithTag("Rider2") != null)
+        {
+            Destroy(GameObject.FindWithTag("Rider2"));
         }
         playerInputList.Clear();
     }

@@ -18,6 +18,7 @@ public class WinScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(WinMusic());
         gameManagerScript = FindObjectOfType<GameManager>();
 
         if (gameManagerScript.player2WinCount > gameManagerScript.player1WinCount) //P1 = red, P2 = blue
@@ -43,8 +44,18 @@ public class WinScreen : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
 
         //Reset variables
+        FindObjectOfType<AudioManagerScript>().Stop("Win Music");
+        FindObjectOfType<AudioManagerScript>().Stop("Win SFX");
+        FindObjectOfType<AudioManagerScript>().Play("Main Menu");
         GameManager.roundNumber = 1;
         gameManagerScript.player1WinCount = 0;
         gameManagerScript.player2WinCount = 0;
+    }
+
+    IEnumerator WinMusic()
+    {
+        FindObjectOfType<AudioManagerScript>().Play("Win SFX");
+        yield return new WaitForSeconds(8);
+        FindObjectOfType<AudioManagerScript>().Play("Win Music");       
     }
 }

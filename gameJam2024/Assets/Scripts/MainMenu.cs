@@ -22,36 +22,40 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("Level");
-        //Load story scene instead
-        //In story scene, play images coroutine, then load level scene
+        FindObjectOfType<AudioManagerScript>().Play("Button2");
     }
 
     public void Return()
     {
         SceneManager.LoadScene("MainMenu");
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void Story()
     {
         SceneManager.LoadScene("Story");
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void Quit()
     {
         Debug.Log("Quit game");
         Application.Quit();
+        FindObjectOfType<AudioManagerScript>().Play("Button2");
     }
 
     public void Credits()
     {
         creditsPanel.SetActive(true);
         credCloseButton.Select();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void CloseCredits()
     {
         creditsPanel.SetActive(false);
         creditsButton.Select();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void Tutorial()
@@ -60,24 +64,28 @@ public class MainMenu : MonoBehaviour
         page1.SetActive(true);
         nextButton.Select();
         PageManager();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void CloseTutorial()
     {
         tutorialPanel.SetActive(false);
         tutorialButton.Select();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void NextPage()
     {
         pageNo++;
         PageManager();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void PrevPage()
     {
         pageNo--;
         PageManager();
+        FindObjectOfType<AudioManagerScript>().Play("Button1");
     }
 
     public void PageManager()

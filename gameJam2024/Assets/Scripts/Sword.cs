@@ -13,7 +13,7 @@ public class Sword : MonoBehaviour
     public Material blueMat;
 
     //Knockback
-    public bool detectKnockback = false;
+    public bool detectKnockback = false;    
 
     private void Start()
     {

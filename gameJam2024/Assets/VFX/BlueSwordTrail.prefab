@@ -4896,7 +4896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8931635398656928395
 Transform:
   m_ObjectHideFlags: 0
@@ -9701,7 +9701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6733986942581573133}
   m_Layer: 0
-  m_Name: SwordTrail
+  m_Name: BlueSwordTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

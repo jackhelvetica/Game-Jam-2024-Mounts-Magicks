@@ -1340,9 +1340,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterHandler, Assembly-CSharp
-        m_MethodName: Ready
+      - m_Target: {fileID: 1603346143}
+        m_TargetAssemblyTypeName: WinScreen, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2547,3 +2547,150 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!1 &2129844041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2129844045}
+  - component: {fileID: 2129844044}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2129844044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129844041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc14225d01ca934da898279f1fe5ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Critical Hit
+    clip: {fileID: 8300000, guid: ee763290b2d0adf498e4a2ad87cd0f84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Normal Hit
+    clip: {fileID: 8300000, guid: dbbd4f0232e50df49a9899fee9f6a92a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dash
+    clip: {fileID: 8300000, guid: 0aa4316afd3c3014693f8717888485f5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Crowd Cheering
+    clip: {fileID: 8300000, guid: 58bc5df95f5be834fa4dfd948ffb337e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword Clash
+    clip: {fileID: 8300000, guid: d4bea39f461cc45409a6b62560bba4f6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Whoosh
+    clip: {fileID: 8300000, guid: 83ab00614dce4b744bd29997c94c7556, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Activate
+    clip: {fileID: 8300000, guid: a043ae38cacfaf74f9268417d8fd0c3c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Chalk
+    clip: {fileID: 8300000, guid: 9b6df07b7e9495944b92ae1ed394268d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Button1
+    clip: {fileID: 8300000, guid: ee6abbc4479ad5c4a9086b912d0d6b63, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Button2
+    clip: {fileID: 8300000, guid: 788a9880c53bfde4ca784da964d0f372, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Win SFX
+    clip: {fileID: 8300000, guid: 2cf4a1e43ec125446b57f3a27187e6aa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Main Menu
+    clip: {fileID: 8300000, guid: a56c58b867fdac6478ca3705ad51581b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Crowd Ambience
+    clip: {fileID: 8300000, guid: 3b1d565de3c6630408ed5cabdc0c5a00, type: 3}
+    volume: 2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Win Music
+    clip: {fileID: 8300000, guid: ebc26945f798a2a4fbe6e76bb43eb72f, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Battle Music
+    clip: {fileID: 8300000, guid: 365c7eea0878c4e43a2d34150f6a8a7b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Countdown Numbers
+    clip: {fileID: 8300000, guid: 40bb67930ce2c2b44be6ac262fa5907d, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Countdown Go
+    clip: {fileID: 8300000, guid: a08a6cde639c5dc488779368efa85876, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &2129844045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129844041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

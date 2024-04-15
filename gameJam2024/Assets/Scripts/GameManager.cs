@@ -154,12 +154,14 @@ public class GameManager : MonoBehaviour
         //Add score marker        
         if (player1won)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Chalk");
             GameObject scoreMarkerGO = Instantiate(scoreMarker, p1ScoreMarkerPos[player1WinCount - 1], Quaternion.identity);
             scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
             player1won = false;
         }
         else if (player2won)
         {
+            FindObjectOfType<AudioManagerScript>().Play("Chalk");
             GameObject scoreMarkerGO = Instantiate(scoreMarker, p2ScoreMarkerPos[player2WinCount - 1], Quaternion.identity);
             scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
             player2won = false;
@@ -196,6 +198,7 @@ public class GameManager : MonoBehaviour
 
     public void ReadyNextRound()
     {
+        FindObjectOfType<AudioManagerScript>().Play("Button2");
         if (roundNumber < 4)
         {
             scoreBoard.SetActive(false);
