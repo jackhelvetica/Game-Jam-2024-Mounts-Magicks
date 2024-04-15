@@ -13,7 +13,7 @@ public class AttachUI : MonoBehaviour
 
     public GameObject manaBarA;
     public GameObject manaBarB;
-    private Vector3 manaBarOffset = new Vector3(-150,-10,0);
+    private Vector3 manaBarOffset = new Vector3(0, -100 ,0);
     
     public GameObject player1Icon;
     public GameObject player2Icon;
@@ -22,6 +22,10 @@ public class AttachUI : MonoBehaviour
     public GameObject critIcon1;
     public GameObject critIcon2;
     private Vector3 critIconOffset = new Vector3(0, 220, 0);
+
+    public GameObject dashBarA;
+    public GameObject dashBarB;
+    private Vector3 dashBarOffset = new Vector3(0, -150, 0);
 
     void Update()
     {
@@ -42,9 +46,12 @@ public class AttachUI : MonoBehaviour
             Vector3 screenPos1 = Camera.main.WorldToScreenPoint(player1Transform.position);
             manaBarA.transform.position = screenPos1 + manaBarOffset;
             player1Icon.transform.position = screenPos1 + iconOffset;
+            dashBarA.transform.position = screenPos1 + dashBarOffset;
+
             Vector3 screenPos2 = Camera.main.WorldToScreenPoint(player2Transform.position);
-            manaBarB.transform.position = screenPos2 - manaBarOffset + new Vector3(0,40,0);
+            manaBarB.transform.position = screenPos2 + manaBarOffset;
             player2Icon.transform.position = screenPos2 + iconOffset;
+            dashBarB.transform.position = screenPos2 + dashBarOffset;
         }
 
         if (mount1Script != null && mount2Script != null) 
@@ -57,7 +64,7 @@ public class AttachUI : MonoBehaviour
                 Vector3 screenPos1 = Camera.main.WorldToScreenPoint(player1Transform.position);
                 critIcon1.transform.position = screenPos1 + critIconOffset;
                 Vector3 screenPos2 = Camera.main.WorldToScreenPoint(player2Transform.position);
-                critIcon2.transform.position = screenPos2 + critIconOffset;
+                critIcon2.transform.position = screenPos2 + critIconOffset;                
             }
             else
             {
