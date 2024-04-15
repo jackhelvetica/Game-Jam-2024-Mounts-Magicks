@@ -9,7 +9,7 @@ public class DashBar : MonoBehaviour
     public float maxDash = 10f;
     public float dashAmount = 0f;
     public float dashCharge = 10f;
-    public float waitTime = 2f;
+    public float waitTime = 5f;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class DashBar : MonoBehaviour
 
     public void UseDash()
     {
-        if (dashBar.value > dashCharge)
+        if (dashBar.value >= dashCharge)
         {
             dashBar.value -= dashCharge;
         }
