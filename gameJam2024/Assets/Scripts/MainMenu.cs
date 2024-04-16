@@ -23,6 +23,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Level");
         FindObjectOfType<AudioManagerScript>().Play("Button2");
+        FindObjectOfType<AudioManagerScript>().Stop("Main Menu");
     }
 
     public void Return()

@@ -1,7 +1,11 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
+using DG.Tweening;
+using UnityEngine.Rendering;
 
 public class Sword : MonoBehaviour
 {
@@ -13,10 +17,19 @@ public class Sword : MonoBehaviour
     public Material blueMat;
 
     //Knockback
-    public bool detectKnockback = false;    
+    public bool detectKnockback = false;
+
+    //Camera
+    public GameObject mainCamera;
+    public float shakeDuration = 1f;
+    public float shakeStrength = 3f;
+    public int vibrato = 8;
+    public float randomness = 0f;
 
     private void Start()
     {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
         //Assign Mount to Sword
         if (rider.CompareTag("Rider1"))
         {
@@ -63,6 +76,9 @@ public class Sword : MonoBehaviour
 
                     other.GetComponent<VisualEffect>().Play();
                     FindObjectOfType<AudioManagerScript>().Play("Critical Hit");
+
+                    Camera mainCameraGO = mainCamera.GetComponent<Camera>();
+                    mainCameraGO.DOShakePosition(shakeDuration, shakeStrength, vibrato, randomness, true);
                 }
                 else if (distance > 6f && !other.GetComponent<Mount>().isInvincible)
                 {

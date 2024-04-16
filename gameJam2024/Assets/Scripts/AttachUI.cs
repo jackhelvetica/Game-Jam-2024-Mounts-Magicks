@@ -58,7 +58,6 @@ public class AttachUI : MonoBehaviour
         {
             if (mount1Script.enableCritIcon || mount2Script.enableCritIcon)
             {
-                Debug.Log("In Crit Zone");
                 critIcon1.SetActive(true);
                 critIcon2.SetActive(true);
                 Vector3 screenPos1 = Camera.main.WorldToScreenPoint(player1Transform.position);

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +20,7 @@ public class Mount : MonoBehaviour
    
     public bool isInvincible = false;
     public bool enableCritIcon = false;
+    private bool enableRound = false;
 
     //Colour
     public Material redMat;
@@ -30,8 +30,8 @@ public class Mount : MonoBehaviour
     //Circle
     public GameObject blueCircle;
     public GameObject redCircle;
-    private Color brightColour = new Color(255,255,255,255);
-    private Color dullColour = new Color(100,100,100,255);
+    private Color brightColour = new Color(255/255,255/255,255/255,255/255);
+    private Color dullColour = new Color(100/255,100/255,100/255,255/255);
 
     //Knockback
     public KnockBack knockbackScript;
@@ -215,6 +215,7 @@ public class Mount : MonoBehaviour
             enableCritIcon = true;
             redCircle.GetComponent<SpriteRenderer>().color = brightColour;
             blueCircle.GetComponent<SpriteRenderer>().color = brightColour;
+            FindObjectOfType<AudioManagerScript>().Play("Activate");
         }
     }
     private void OnTriggerExit(Collider other)
@@ -307,7 +308,7 @@ public class Mount : MonoBehaviour
 
     public void EnableNextRound()
     {
-        if (healthbarScript.health == 0) //if someone dies
+        if (healthbarScript.health == 0 && !enableRound) //if someone dies
         {
             //Next round
             if (gameObject.CompareTag("Mount1")) //mount1 died
@@ -320,8 +321,10 @@ public class Mount : MonoBehaviour
                 GameManager.player1won = true;
                 gameManagerScript.player1WinCount++;
             }
+            enableRound = true;
             gameManagerScript.NextRound();
             healthbarScript.health += 3;
+            enableRound = false;
         }        
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -14,27 +15,40 @@ public class WinScreen : MonoBehaviour
     public Material riderBlueMat;
     public Material swordBlueMat;
     public TextMeshProUGUI winningPlayerText;
+    public Button returnButton;
+    private bool playWinAnim = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        returnButton.Select();
+        returnButton.interactable = true;
         StartCoroutine(WinMusic());
         gameManagerScript = FindObjectOfType<GameManager>();
-
+        playWinAnim = true;
+        
         if (gameManagerScript.player2WinCount > gameManagerScript.player1WinCount) //P1 = red, P2 = blue
-        {
-            riderWin.GetComponent<Animator>().SetBool("Win", true);
-
+        {            
             mountWin.GetComponentInChildren<SkinnedMeshRenderer>().material = mountBlueMat;
             riderWin.GetComponentInChildren<SkinnedMeshRenderer>().material = riderBlueMat;
             sword.GetComponent<Renderer>().material = swordBlueMat;
 
-            winningPlayerText.text = "Player 2";
+            winningPlayerText.text = "Team B";
         }
         else if (gameManagerScript.player1WinCount > gameManagerScript.player2WinCount)
         {
-            winningPlayerText.text = "Player 1";
-        }
+            winningPlayerText.text = "Team A";
+        }       
+    }
+
+    private void Update()
+    {
+        if (playWinAnim)
+        {
+            Debug.Log("Play win animation");
+            riderWin.GetComponent<Animator>().SetBool("Win", true);
+            playWinAnim = false;
+        }     
     }
 
     public void ReturnToMainMenu()
@@ -46,7 +60,6 @@ public class WinScreen : MonoBehaviour
         //Reset variables
         FindObjectOfType<AudioManagerScript>().Stop("Win Music");
         FindObjectOfType<AudioManagerScript>().Stop("Win SFX");
-        FindObjectOfType<AudioManagerScript>().Play("Main Menu");
         GameManager.roundNumber = 1;
         gameManagerScript.player1WinCount = 0;
         gameManagerScript.player2WinCount = 0;

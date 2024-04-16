@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using UnityEngine.UIElements;
 
 public class CharacterHandler : MonoBehaviour
 {
@@ -48,12 +47,13 @@ public class CharacterHandler : MonoBehaviour
     {
         if (index == 4 && !isReady)
         {
+            Debug.Log("Ready?");
             FindObjectOfType<AudioManagerScript>().Play("Player Ready");
             isReady = true;
             readyButton.interactable = true;
             readyButton.Select();
         }
-        else
+        else if (index < 4)
         {
             readyButton.interactable = false;
             resetButton.Select();
@@ -192,11 +192,11 @@ public class CharacterHandler : MonoBehaviour
     public void ResetPlayers()
     {
         Debug.Log("Reset Players");
+        FindObjectOfType<AudioManagerScript>().Play("Button2");
         index = 0;
         foreach (var playerImage in playersImageList)
         {
             playerImage.SetActive(false);
-
         }
         foreach (var playerInput in playerInputList)
         {
@@ -205,20 +205,27 @@ public class CharacterHandler : MonoBehaviour
 
         if (GameObject.FindWithTag("Mount1") != null)
         {
-            Destroy(GameObject.FindWithTag("Mount1"));
+            GameObject mount1 = GameObject.FindWithTag("Mount1");
+            Destroy(mount1.transform.parent.gameObject);
         }
         if (GameObject.FindWithTag("Mount2") != null)
         {
-            Destroy(GameObject.FindWithTag("Mount2"));
+            GameObject mount2 = GameObject.FindWithTag("Mount2");
+            Destroy(mount2.transform.parent.gameObject);
         }
         if (GameObject.FindWithTag("Rider1") != null)
         {
-            Destroy(GameObject.FindWithTag("Rider1"));
+            GameObject rider1 = GameObject.FindWithTag("Rider1");
+            Destroy(rider1.transform.parent.gameObject);
         }
         if (GameObject.FindWithTag("Rider2") != null)
         {
-            Destroy(GameObject.FindWithTag("Rider2"));
+            GameObject rider2 = GameObject.FindWithTag("Rider2");
+            Destroy(rider2.transform.parent.gameObject);
         }
         playerInputList.Clear();
+        playerInputManager.playerPrefab = playersList[index];
+        isReady = false;
+        playerInputManager.EnableJoining();
     }
 }

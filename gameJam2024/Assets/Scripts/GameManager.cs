@@ -45,20 +45,14 @@ public class GameManager : MonoBehaviour
     public Button readyButton;
     public GameObject roundOverText;
     public GameObject gameOverText;
+    public TextMeshProUGUI roundNumberText;
+    public TextMeshProUGUI roundNumberInGameText;
     public CharacterHandler characterHandlerScript;
     public static GameManager instance;
-    
+
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        DontDestroyOnLoad(gameObject);
     }
     void Update()
     {
@@ -149,26 +143,25 @@ public class GameManager : MonoBehaviour
         rider1.GetComponent<PlayerInput>().DeactivateInput();
         rider2.GetComponent<PlayerInput>().DeactivateInput();
 
+        
         StartCoroutine(RoundOverCountdown());
 
         //Add score marker        
         if (player1won)
-        {
-            FindObjectOfType<AudioManagerScript>().Play("Chalk");
+        {            
             GameObject scoreMarkerGO = Instantiate(scoreMarker, p1ScoreMarkerPos[player1WinCount - 1], Quaternion.identity);
-            scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
+            scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);                      
             player1won = false;
         }
         else if (player2won)
         {
-            FindObjectOfType<AudioManagerScript>().Play("Chalk");
             GameObject scoreMarkerGO = Instantiate(scoreMarker, p2ScoreMarkerPos[player2WinCount - 1], Quaternion.identity);
             scoreMarkerGO.transform.SetParent(scoreBoard.transform, false);
             player2won = false;
-        }
-
+        }                
         readyButton.Select();
-        roundNumber++;
+        roundNumber++;                
+        FindObjectOfType<AudioManagerScript>().Play("Chalk");
     }
     IEnumerator RoundOverCountdown()
     {       
@@ -180,6 +173,7 @@ public class GameManager : MonoBehaviour
         if (roundNumber < 3)
         {
             roundOverText.SetActive(true);
+            FindObjectOfType<AudioManagerScript>().Play("Countdown Go");
             roundOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
             yield return new WaitForSeconds(1.5f);
             roundOverText.SetActive(false);
@@ -187,17 +181,20 @@ public class GameManager : MonoBehaviour
         else if (roundNumber == 3)
         {
             gameOverText.SetActive(true);
+            FindObjectOfType<AudioManagerScript>().Play("Countdown Go");
             gameOverText.transform.DOPunchScale(punchScale, punchDuration, punchVibrato, punchElasticity);
             yield return new WaitForSeconds(1.5f);
             gameOverText.SetActive(false);
         }        
-        scoreBoard.SetActive(true);
+        scoreBoard.SetActive(true);        
         BackToSpawn();
 
     }
 
     public void ReadyNextRound()
     {
+        roundNumberInGameText.text = "Round " + roundNumber;
+        roundNumberText.text = "Round " + roundNumber;
         FindObjectOfType<AudioManagerScript>().Play("Button2");
         if (roundNumber < 4)
         {

@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4563094221501637402
 Transform:
   m_ObjectHideFlags: 0
@@ -641,6 +641,7 @@ MonoBehaviour:
   detectKnockbackCounter: 0
   blueGlowMat: {fileID: 2100000, guid: 9edc9a59545fb324ba83b7f3a47d2a63, type: 2}
   redGlowMat: {fileID: 2100000, guid: 512c8fb8c09700f438348bb29d6ae523, type: 2}
+  dashBarScript: {fileID: 0}
 --- !u!114 &3559268843559466434
 MonoBehaviour:
   m_ObjectHideFlags: 0
